@@ -1,0 +1,288 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- =========== FULL CONFIGURATION FILE ================================== -->
+<faces-config version="2.1"
+              xmlns="http://java.sun.com/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd">
+    
+    <application>
+        <locale-config>
+            <default-locale>en</default-locale>
+        </locale-config>
+        <resource-bundle>
+            <base-name>/resources/Bundle</base-name>
+            <var>bundle</var>
+        </resource-bundle>
+    </application>
+    
+    <!-- Post-registration *successful* navigation from any view -->
+    <navigation-rule>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-action>#{registration.registerUser}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/index.xhtml?registered=true</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-action>#{registration.registerUser}</from-action>
+            <from-outcome>failure</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <!-- Request to register -->
+    <navigation-rule>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-outcome>register</from-outcome>
+            <to-view-id>/login/register.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <!-- Where to go after creating or editing a recipe -->
+    <!-- TODO: redirect to User's recipes -->
+    <navigation-rule>
+        <from-view-id>/account/recipe_wizard.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{createEditRecipe.doCreateRecipe}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/account/my_recipes.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/account/my_recipes.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{createEditRecipe.doDeleteRecipe}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/account/my_recipes.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/account/recipe_wizard.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{createEditRecipe.doEditRecipe}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/account/my_recipes.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    
+    <!-- Where to go after creating a group -->
+    <!-- TODO: redirect to User's groups -->
+    <navigation-rule>
+        <from-view-id>/account/group_wizard.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{groupsController.doCreateGroups}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/account/my_groups.xhtml?by=managed</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/account/edit_profile.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{editProfile.save}</from-action>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/professional/submit_review.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{professionalStatus.submitReview}</from-action>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    
+    <!-- From any page -->
+    <navigation-rule>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-outcome>home</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{userIdentity.logout}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{groupsController.doEditGroup}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/account/my_groups.xhtml?by=managed</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>login</from-outcome>
+            <to-view-id>/login/login.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>group.create</from-outcome>
+            <to-view-id>/account/group_wizard.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>groups.view</from-outcome>
+            <to-view-id>/browse_groups.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>mygroups.created</from-outcome>
+            <to-view-id>/account/my_groups.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>mygroups.manage</from-outcome>
+            <to-view-id>/account/my_groups.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>recipe.create</from-outcome>
+            <to-view-id>/account/recipe_wizard.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>recipes.view</from-outcome>
+            <to-view-id>/browse_recipes.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>favorites.view</from-outcome>
+            <to-view-id>/account/favorites.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>myrecipes.view</from-outcome>
+            <to-view-id>/account/my_recipes.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>search.view</from-outcome>
+            <to-view-id>/search.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>profile.edit</from-outcome>
+            <to-view-id>/account/edit_profile.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>groupProfile.edit</from-outcome>
+            <to-view-id>/account/group_wizard.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>aboutUs</from-outcome>
+            <to-view-id>/about_us.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>userProfile.view</from-outcome>
+            <to-view-id>/user_profile.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>groupProfile.view</from-outcome>
+            <to-view-id>/group_profile.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>recipeProfile.view</from-outcome>
+            <to-view-id>/recipe.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>admin.control</from-outcome>
+            <to-view-id>/admin/cPanel.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>siteMod.control</from-outcome>
+            <to-view-id>/siteMod/cPanel.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        
+        <!-- Any sort of failure leads to 500 page -->
+        <navigation-case>
+            <from-outcome>failure</from-outcome>
+            <to-view-id>/errors/HTTP500.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/recipe.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{viewRecipeBean.flagRecipe}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/account/flagging_thank_you.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/recipe.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/profile.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/group_profile.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>        
+    
+    <navigation-rule>
+        <from-view-id>/professional/submit_review.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{professionalStatus.submitReview}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/index.xhtml?reviewSubmit=true</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/sitemod/cPanel.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{news.doCreateNewsPost}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/index.xhtml?newsSubmit=true</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/user_profile.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{userProfile.doDeleteUser}</from-action>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+</faces-config>

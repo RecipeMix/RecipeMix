@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ Copyright (C) 2013 Alex Chavez <alex@alexchavez.net>
+ California State University Long Beach (CSULB) ALL RIGHTS RESERVED
+
+ Use of this software is authorized for CSULB students in Dr. Monge's classes, so long
+ as this copyright notice remains intact. Students must request permission from Dr. Monge
+ if the code is to be used in other venues outside of Dr. Monge's classes.
+
+ This program is distributed to CSULB students in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+-->
+<!-- @auhtor: Alex Chavez <alex@alexchavez.net> -->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:body>
+        <ui:composition template="/resources/templates/commonLayout.xhtml">
+            <ui:define name="content">
+                <ui:define name="title">Thank you!</ui:define>
+                <div class="errorPicture">
+                    <h:graphicImage url="/resources/images/mindtrick.jpg"
+                                    alt="These aren't the droids you're looking for."
+                                    height="320"
+                                    width="680"/>
+                </div>
+                <h2 id="explanation">Thank you for reporting this recipe.</h2>
+            </ui:define>
+        </ui:composition>
+
+    </h:body>
+
+</html>

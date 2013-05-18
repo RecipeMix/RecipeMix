@@ -1,0 +1,117 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./../resources/templates/commonLayout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="title">
+        Site Mod Panel
+    </ui:define>
+
+    <ui:define name="content">
+        <p:growl id="growl" />
+        <div id="siteModView">
+            <h1>Site Moderator Control Panel</h1>
+            <p:separator />
+            <p:growl id="messages"/>
+            <h2>Post Site News</h2>
+            <h:form id="newsPostForm">
+                <ul class ="formFields">
+                    <li>
+                        <p:inputText id="title" value="#{news.newNewsPost.newsTitle}" title="Post Title" 
+                                     required="true" requiredMessage="The Post Title field is required"
+                                     maxlength="50"/>
+                        <p:watermark for="title" value="Title" />
+                    </li>
+                    <li>
+                        <p:editor maxlength="2500" height="300" id="content" controls="bold
+                                  italic
+                                  underline
+                                  strikethrough
+                                  subscript
+                                  superscript
+                                  size
+                                  bullets
+                                  numbering
+                                  alignleft
+                                  center
+                                  alignright
+                                  justify
+                                  outdent
+                                  indent"
+                                  value="#{news.newNewsPost.newsBody}"
+                                  required="true" requiredMessage="The Content field is required."/>
+                    </li>
+                    <li>
+                        <p:commandButton value="Post" ajax="false" update="messages" action="#{news.doCreateNewsPost}" />
+                    </li>
+                </ul>
+            </h:form>
+            <p:separator />
+            <h2>Set Featured Group(s)</h2>
+            <h:form>
+                Select from the list below. Hold Shift or CTRL on your keyboard to select multiple groups.
+                <p:dataTable var="group" value="#{browseGroups.lazyModel}" rowKey="#{group.groupID}"
+                             paginator="true" rows="10" selection="#{featured.groupsSelectedByMod}" selectionMode="multiple"
+                             emptyMessage="No groups found..." widgetVar="gTable"
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             lazy ="true" rowsPerPageTemplate="10,15,50" >
+                    <p:ajax event="rowSelect" listener="#{featured.onRowSelect}"   
+                            update=":growl" />
+                    <p:column sortBy="#{group.groupID}" filterBy="#{group.groupID}"
+                              filterMatchMode="exact">
+                        <f:facet name="header">
+                            <h:outputText value="ID" />
+                        </f:facet>
+                        <h:outputText value="#{group.groupID}" title="ID" />
+                    </p:column>
+
+                    <p:column sortBy="#{group.groupName}" filterBy="#{group.groupName}" 
+                              filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="Group Name" />
+                        </f:facet>
+                        <h:outputText value="#{group.groupName}" />
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+            <p:separator />
+            <h2>Set Featured Recipe(s)</h2>
+            <h:form>
+                <div>
+                    Select from the list below. Hold Shift or CTRL on your keyboard to select multiple recipes.
+                    Clear all selections to use randomly selected recipes.
+                </div>
+                <p:dataTable id="recipeTable" var="recipe" value="#{browseRecipes.lazyModel}" rowKey="#{recipe.recipeId}"
+                             paginator="true" rows="10" selection="#{featured.recipesSelectedByMod}" selectionMode="multiple"
+                             emptyMessage="No recipes found..." widgetVar="rTable"
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             lazy ="true" rowsPerPageTemplate="10,15,50" >
+                    <p:ajax event="rowSelect" listener="#{featured.onRowSelect}"   
+                            update=":growl" />
+                    <f:facet name="header">
+                        <p:commandButton styleClass="smallButton" value="Clear" action="#{featured.clearSelectedRecipes()}" update="recipeTable" />
+                    </f:facet>
+                    <p:column sortBy="#{recipe.recipeId}" filterBy="#{recipe.recipeId}"
+                              filterMatchMode="exact" style="width:30px;">
+                        <f:facet name="header">
+                            <h:outputText value="ID" />
+                        </f:facet>
+                        <h:outputText value="#{recipe.recipeId}" title="ID" />
+                    </p:column>
+
+                    <p:column sortBy="#{recipe.recipeName}" filterBy="#{recipe.recipeName}" 
+                              filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="Recipe Name" />
+                        </f:facet>
+                        <h:outputText value="#{recipe.recipeName}" />
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,398 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./resources/templates/commonLayout.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="title">#{viewRecipeBean.recipe.recipeName}</ui:define>
+    <ui:define name="header">
+        <ui:include src="/resources/templates/commonHeader.xhtml" />
+        <h:outputStylesheet library="css" name="nutritionLabel.min.css" />
+        <h:outputScript library="js" name="nutritionLabel.min.js" target="head"/>
+    </ui:define>
+
+    <ui:define name="content">
+
+        <p:dialog id="compareDialog" resizable="false" closable="true" 
+                  visible="true" showHeader="false" 
+                  position="10,300" widgetVar="compDialog">
+            <h:form prependId="false" id="compareForm">
+                <p:dataList id="compareList" value="#{compare.compare}" var="recipe" 
+                            paginator="true" paginatorAlwaysVisible="false" type="none">
+                    <f:facet name="header">
+                        <h:outputText value="Compare Recipes" />
+                    </f:facet>
+                    <p:panel>
+                        <p:commandButton icon="ui-icon-trash" actionListener="#{compare.removeFromComparison}" 
+                                         update=":growl, :compareDialog" style="width:20px;height:20px;" >
+                            <f:attribute name="recipe" value="#{recipe.recipeId}" />
+                        </p:commandButton>
+                        <h:link value="#{recipe.recipeName}" outcome="recipeProfile.view">
+                            <f:param name="recipe" value="#{recipe.recipeId}" />
+                        </h:link>
+                    </p:panel>
+                    <f:facet name="footer">
+                        <p:commandButton 
+                            id="compareBtn"
+                            value="Add"
+                            actionListener="#{compare.addToComparison}"
+                            icon="ui-icon-plus"
+                            update=":growl :compareDialog">
+                            <f:attribute name="recipe" value="#{viewRecipeBean.recipe.recipeId}" />
+                        </p:commandButton>
+                        <p:button disabled="#{!compare.ready}"  value="Compare" outcome="compare" />
+                    </f:facet>
+                </p:dataList>
+            </h:form>
+        </p:dialog>
+        <p:growl id="growl" />
+        <div id="recipeView" style="position:relative">
+            <div id="gallery">
+                <p:galleria id="imageGallery"  value="#{viewRecipeBean.recipe.imageGallery}" 
+                            var="i" showCaption="false" effectSpeed="4000">
+                    <p:graphicImage styleClass="recipeGalleryImage" url="#{i.imagePath}" alt="#{i.caption}" title ="#{i.description}"/>
+                </p:galleria>
+                <ul class="noBullets">
+                    <li>
+                        <p:button styleClass="recipeBtn"
+                                  id="recipeEditBtn"
+                                  outcome="/account/recipe_wizard.xhtml"
+                                  value="Edit This Recipe"
+                                  icon="ui-icon-pencil"
+                                  rendered="#{viewRecipeBean.editAuthorized}" >
+                            <f:param name="recipe" value="#{viewRecipeBean.recipe.recipeId}" />
+                        </p:button>
+                    </li>
+                    <li>
+                        <p:dialog id="imageDialogBtn" width="750px" closeOnEscape="true" closable="true" resizable="true" header="Upload Image" widgetVar="upload"
+                                  onShow="" onHide="">
+                            <h:form prependId="false" enctype="multipart/form-data">
+                                <p:fileUpload fileUploadListener="#{viewRecipeBean.createRecipeImage}" showButtons="false" label="Add Image" dragDropSupport="true" 
+                                              sizeLimit ="5000000"  oncomplete="upload.hide();javascript:location.reload(true);" 
+                                              allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+                                <h:inputHidden id="recipeId" value="#{viewRecipeBean.recipe.recipeId}" />
+                            </h:form>       
+                        </p:dialog>
+                        <p:commandButton styleClass="recipeBtn"
+                                         id="profileImageUpBtn"
+                                         value="Upload Picture"
+                                         rendered="#{viewRecipeBean.editAuthorized}"
+                                         icon="ui-icon-arrowreturnthick-1-n"
+                                         ajax="true"
+                                         onclick="upload.show();"/>
+                    </li>
+                    <li>
+                        <h:form id="flagForm" prependId="false">
+                            <p:commandButton styleClass="recipeBtn"
+                                             id="recipeFlagBtn"
+                                             value="Flag This Recipe"
+                                             ajax="false"
+                                             disabled="#{flagBean.canFlagRecipe}"
+                                             action="#{flagBean.flagObject()}"
+                                             icon="ui-icon-flag"
+                                             rendered="#{userIdentity.isUserAuthenticated}" 
+                                             update=":growl">
+                                <f:param name="recipe" value="#{viewRecipeBean.recipe.recipeId}" />
+                                <f:param name="object" value="1" />
+                            </p:commandButton>
+                        </h:form>
+                    </li>
+                    <li>
+                        <h:form>
+                            <p:commandButton id="favoriteBtn" value="Favorite"
+                                             styleClass="recipeBtn"
+                                             icon="ui-icon-star" update=":growl"
+                                             rendered="#{userIdentity.isUserAuthenticated}"
+                                             disabled="#{viewRecipeBean.alreadyFavorited}"
+                                             actionListener="#{editProfile.addFavorite}">
+                                <f:attribute name="recipe" value="#{viewRecipeBean.recipe.recipeId}" />
+                            </p:commandButton>
+                        </h:form>
+                        <p:commandButton id="nutritionFactsBtn"
+                                         value="Nutrition Facts"
+                                         ajax="true"
+                                         onclick="nutritionFactsDialog.show()"
+                                         icon="ui-icon-info"
+                                         styleClass="recipeBtn"/>
+                    </li>
+                    <li>
+                        <p:dialog closeOnEscape="true" resizable="false"
+                                  widgetVar="nutritionFactsDialog" >
+                            <div id="nutrition-label"></div>
+                            <a href="http://www.nutritionix.com/api">
+                                <img src="https://d3jpl91pxevbkh.cloudfront.net/nutritionix/image/upload/v1363458498/attribution_jqfdgy.png" border="0" />
+                            </a>
+                        </p:dialog>
+                        <p:button
+                            id="recipeReviewBtn"
+                            value="Submit Review" styleClass="recipeBtn"
+                            outcome="/professional/submit_review.xhtml"
+                            rendered="#{professionalStatus.isProfessional}" 
+                            disabled="#{viewRecipeBean.hasAlreadyReviewed}" >
+                            <f:param name="recipe" value="#{viewRecipeBean.recipe.recipeId}" />
+                        </p:button>
+                        <p:commandButton id ="addToGroup" value="Add to Group"
+                                         icon="ui-icon-star" styleClass="recipeBtn"
+                                         rendered="#{userIdentity.isUserAuthenticated}" onclick="RecipeToGroupDialog.show();" />
+                        <h:form>
+                            <p:commandButton id="deleteBtn" styleClass="groupPageBtn" value="Delete Recipe" 
+                                             rendered="#{viewRecipeBean.isCreator or userIdentity.isAdmin}"
+                                             ajax="false" action="#{createEditRecipe.doDeleteRecipe()}">
+                                <f:param name="recipe" value="#{viewRecipeBean.recipe.recipeId}" />
+                            </p:commandButton>
+                        </h:form>
+                    </li>
+                </ul> 
+            </div>
+
+            <h1>
+                <h:outputText id="recipeName" value="#{viewRecipeBean.recipe.recipeName}" />
+            </h1>
+            <h:form prependId="false" id="recipeRate">
+                <p:rating stars="5" id="recipeRateStars"
+                          value="#{viewRecipeBean.rating}"  
+                          disabled="#{!userIdentity.isUserAuthenticated}" >
+                    <f:param name="recipe" value="#{viewRecipeBean.recipe.recipeId}" />
+                    <p:ajax event="rate" listener="#{viewRecipeBean.handleRating}" />
+                    <p:ajax event="cancel" listener="#{viewRecipeBean.oncancel}" />
+                </p:rating> (#{viewRecipeBean.totalRatings})
+            </h:form>
+            <div id="creatorLink">
+                <br/>submitted by: <h:link value="#{viewRecipeBean.recipe.creator.firstName} #{viewRecipeBean.recipe.creator.lastName}"
+                                           outcome="/user_profile.xhtml" >
+                    <f:param name="user" value="#{viewRecipeBean.recipe.creator.userName}"/>
+                </h:link>
+            </div>
+            <p:tagCloud id="tagCloud" model="#{viewRecipeBean.tags}">
+            </p:tagCloud>
+            <h2>The Lowdown</h2>
+            <panel id="recipeLowdown">
+                <p><h:outputText value="#{viewRecipeBean.recipe.recipeDescription}" /></p>
+            </panel>
+            <p:panelGrid id="recipeTimes" columns="2">
+                <h:outputText value="Prep: #{viewRecipeBean.readablePrepTime}" />
+                <h:outputText value="Cook: #{viewRecipeBean.readableCookTime}" />
+                <h:outputText value="Total: #{viewRecipeBean.totalTime}" />
+                <h:outputText value="Serves: #{viewRecipeBean.recipe.servings}" />
+            </p:panelGrid>
+
+            <h2>Ingredients</h2>
+            <p:dataGrid styleClass="recipeIngredients" value="#{viewRecipeBean.recipe.ingredients}"
+                        var="i" columns="2" >
+                <h:outputText  value="#{i}"/>
+            </p:dataGrid>
+
+            <h2>Instructions</h2>
+            <p:dataList type="none" value="#{viewRecipeBean.recipe.instructions}" var="step" styleClass="recipeSteps">
+                <p:panel>
+                    <div class="stepNum">#{step.stepNumber}. </div><h:outputText value="#{step.stepDescription}"/>
+                </p:panel>
+            </p:dataList>
+
+            <p:dataGrid id="reviews" value="#{viewRecipeBean.recipe.reviews}" var="review" 
+                        rendered="#{not empty viewRecipeBean.recipe.reviews}" columns="3">
+                <p:panel styleClass="reviewBlurb">
+                    <h:outputText value="#{review.title}" />
+                    - <h:link outcome="/user_profile.xhtml" value="#{review.reviewer.userName}">
+                        <f:param name="user" value="#{review.reviewer.userName}" />
+                    </h:link>
+                </p:panel>
+            </p:dataGrid>
+
+            <p:dataGrid id="relatedRecipes" rendered="${not empty viewRecipeBean.relatedRecipes}" 
+                        columns="4" rows="4" 
+                        paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom"
+                        value="#{viewRecipeBean.relatedRecipes}" var="r" >
+                <f:facet name="header"><h:outputText value="Related Recipes" /></f:facet>
+                <p:panel styleClass="relatedPanel">
+                    <p:graphicImage width="150" url="#{r.imageGallery[0].imagePath}"
+                                    alt="#{r.imageGallery[0].caption}" title ="#{r.imageGallery[0].description}"/><br/>
+                    <h:link outcome="/recipe.xhtml" value="#{r.recipeName}">
+                        <f:param name="recipe" value="#{r.recipeId}" />
+                    </h:link>
+                </p:panel>
+            </p:dataGrid>
+
+            <div id="recipeCommentsSection">
+                <h:form prependId="false" id="commentForm">
+                    <p:dataGrid id="commentsContainer" lazy="true"
+                                columns="1" rows="5" paginator="TRUE"
+                                paginatorPosition="bottom" 
+                                paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink} {RowsPerPageDropdown}"
+                                rowsPerPageTemplate="5,10,15"
+                                value="#{viewRecipeBean.commentModel}" var="c"
+                                emptyMessage="No comments.... yet.">
+                        <f:facet name="header" >Comments</f:facet>
+                        <p:column>
+                            <p:panelGrid columns="1" >
+                                <f:facet name="header">
+                                    <div id="commentInfo">
+                                        Posted by <h:link value="#{c.commenter.userName}" outcome="/user_profile.xhtml">
+                                            <f:param name="user" value="#{c.commenter.userName}" />
+                                        </h:link> on <h:outputText id="commentDate" value="#{c.dateCommented}" >
+                                            <f:convertDateTime dateStyle="full" timeZone="PST" type="both" />
+                                        </h:outputText>
+                                    </div>
+                                    <c:if test="#{userIdentity.isAdmin or viewRecipeBean.editAuthorized}">
+                                        <p:commandButton value="Delete" update="@form" ajax="false"
+                                                         action="#{viewRecipeBean.doDeleteComment()}" >
+                                            <f:setPropertyActionListener target="#{viewRecipeBean.deleteComment}"
+                                                                         value="#{c}" />
+                                        </p:commandButton>
+                                    </c:if>
+                                </f:facet>
+                                <h:outputText value="#{c.body}" escape="false" />
+                            </p:panelGrid>
+                        </p:column>
+                    </p:dataGrid>
+                </h:form>
+                    <h:form prependId="false" rendered="#{userIdentity.isUserAuthenticated}">
+                        <p:editor maxlength="5000" height="200" id="commentBody" required="true" 
+                                  width="400" widgetVar="editor" controls="bold
+                                  italic
+                                  underline
+                                  strikethrough
+                                  subscript
+                                  superscript
+                                  size
+                                  bullets
+                                  numbering
+                                  alignleft
+                                  center
+                                  alignright
+                                  justify
+                                  outdent
+                                  indent"
+                                  requiredMessage="Please don't submit an empty comment! :("
+                                  value="#{viewRecipeBean.newComment.body}"
+                                  rendered="#{userIdentity.isUserAuthenticated}"
+                                  disabled="#{!userIdentity.isUserAuthenticated}" />
+                        <p:watermark for="commentBody" value="Enter your comment..." />
+                        <div id="centerButtons">
+                            <p:commandButton styleClass="smallButton" value="Submit Comment" update=":commentForm:commentsContainer" 
+                                             actionListener="#{viewRecipeBean.doCreateComment}" icon="ui-icon-disk"
+                                             oncomplete="editor.clear()" />
+                            <p:commandButton id="clearButton" styleClass="smallButton" type="button" value="Clear" onclick="editor.clear();"  
+                                             icon="ui-icon-close" /> 
+                        </div>
+                    </h:form>
+            </div>
+
+            <h:form rendered="#{userIdentity.isUserAuthenticated}" >
+                <p:dialog id="modalDialog" header="Add to Group" widgetVar="RecipeToGroupDialog"  
+                          closable="true"
+                          position="center" height="400" width="600"  draggable="false" resizable="false">  
+                    <h3>Choose the groups you would like to add the recipe to</h3>
+                    <p:pickList id="PickList" value="#{recipeToGroup.groups}" var="group" effect="slide"
+                                itemValue="#{group}" itemLabel="#{group.groupName}" converter="#{groupConverter}"
+                                showSourceControls="true" showTargetControls="true" showCheckbox="true"
+                                showSourceFilter="true" showTargetFilter="true" filterMatchMode="contains" >
+
+                        <f:facet name="sourceCaption">Available</f:facet>
+                        <f:facet name="targetCaption">Add To</f:facet>
+
+                        <p:column style="width:75%;">
+                            #{group.groupName}
+                        </p:column>
+                    </p:pickList>
+                    <p:commandButton id ="addToGroupFinal" value="Finish Adding" action="#{recipeToGroup.addToGroup()}" 
+                                     update=":growl" ajax="false" onclick="RecipeToGroupDialog.hide();"  >
+                        <f:param name="recipe" value="#{viewRecipeBean.recipe.recipeId}" />
+                    </p:commandButton>
+                </p:dialog>
+            </h:form>
+        </div>
+        <h:inputHidden id="recipe" value="#{viewRecipeBean.recipe.recipeId}"/>
+
+        <script type="text/javascript">
+            //extending/overriding PrimeFaces carousel script
+            if (typeof (PrimeFaces) != 'undefined') {
+                PrimeFaces.widget.Carousel = PrimeFaces.widget.Carousel.extend({init: function(b) {
+                        this._super(b);
+                        this.viewport = this.jq.children(".ui-carousel-viewport");
+                        this.header = this.jq.children(".ui-carousel-header"), this.list = this.viewport.children("ul");
+                        this.items = this.list.children(".ui-carousel-item");
+                        this.prevButton = this.header.children(".ui-carousel-prev-button");
+                        this.nextButton = this.header.children(".ui-carousel-next-button");
+                        this.pageLinks = this.header.find(".ui-carousel-page-links .ui-carousel-page-link");
+                        this.dropdown = this.header.children(".ui-carousel-dropdown");
+                        this.state = $(this.jqId + "_first");
+                        this.cfg.numVisible = this.cfg.numVisible || 3;
+                        this.cfg.pageLinks = this.cfg.pageLinks || 3;
+                        this.cfg.effect = this.cfg.effect || "slide";
+                        this.cfg.effectDuration = this.cfg.effectDuration || 500;
+                        this.cfg.easing = this.cfg.easing || "easeInOutCirc";
+                        this.cfg.pageCount = Math.ceil(this.items.length / this.cfg.numVisible);
+                        this.cfg.firstVisible = (this.cfg.firstVisible || 0) % this.items.length;
+                        this.cfg.page = (this.cfg.firstVisible / this.cfg.numVisible) + 1;
+                        this.animating = false;
+                        var c = this.items.filter(":first"), a = c.get(0);
+                        this.cfg.itemOuterWidth = c.innerWidth() + parseInt(this.getProperty(a, "margin-Left")) + parseInt(this.getProperty(a, "margin-Right")) + ((parseInt(this.getProperty(a, "border-Left-Width")) + parseInt(this.getProperty(a, "border-Right-Width"))));
+                        this.cfg.itemOuterHeight = c.innerHeight() + Math.max(parseInt(this.getProperty(a, "margin-Top")), parseInt(this.getProperty(a, "margin-Bottom"))) + ((parseInt(this.getProperty(a, "border-Top-Width")) + parseInt(this.getProperty(a, "border-Bottom-Width"))));
+                        if (this.cfg.vertical) {
+                            this.viewport.width(this.cfg.itemOuterWidth);
+                            this.viewport.height(this.cfg.numVisible * this.cfg.itemOuterHeight)
+                        } else {
+                            this.viewport.width(this.cfg.numVisible * this.cfg.itemOuterWidth);
+                            this.viewport.height(this.cfg.itemOuterHeight)
+                        }
+                        this.jq.width(this.viewport.outerWidth(true));
+                        this.setOffset(this.getItemPosition(this.cfg.firstVisible));
+                        this.checkButtons();
+                        this.bindEvents();
+                        //stop autoplay starting at init.
+                        //if (this.cfg.autoplayInterval) {
+                        //    this.startAutoplay()
+                        //}
+                    }, startAutoPlay: function() {
+                        //new startAutoPlay function
+                        var a = this;
+                        if (this.cfg.autoplayInterval) {
+                            setInterval(function() {
+                                a.next()
+                            }, this.cfg.autoplayInterval)
+                        }
+                    }, startAutoplay: function() {
+                        //remove startAutoplay function
+                    }
+                });
+            }
+        });
+    };        </script>
+
+        <script type="text/javascript">
+    $ = jQuery;
+    $(function() {
+        $('#nutrition-label').nutritionLabel({
+            'showServingUnitQuantityTextbox': false,
+            'showServingUnitQuantity': false,
+            'showAmountPerServing': false,
+            'itemName': '#{viewRecipeBean.recipe.recipeName}',
+            'ingredientList': '#{viewRecipeBean.readableIngredientsList}',
+            'showPolyFat': false,
+            'showMonoFat': false,
+            'valueCalcium': #{viewRecipeBean.calciumPercentage},
+            'valueCalories': #{viewRecipeBean.calories},
+            'valueCholesterol': #{viewRecipeBean.cholesterol},
+            'valueFatCalories': #{viewRecipeBean.caloriesFromFat},
+            'valueFibers': #{viewRecipeBean.dietaryFiber},
+            'valueIron': #{viewRecipeBean.ironPercentage},
+            'valueProteins': #{viewRecipeBean.protein},
+            'valueSatFat': #{viewRecipeBean.saturatedFat},
+            'valueSodium': #{viewRecipeBean.sodium},
+            'valueSugars': #{viewRecipeBean.sugars},
+            'valueTotalCarb': #{viewRecipeBean.totalCarbohydrates},
+            'valueTotalFat': #{viewRecipeBean.totalFat},
+            'valueTransFat': #{viewRecipeBean.transFat},
+            'valueVitaminA': #{viewRecipeBean.vitaminAPercentage},
+            'valueVitaminC': #{viewRecipeBean.vitaminCPercentage}
+        });
+    });
+        </script>
+    </ui:define>
+</ui:composition>
+
