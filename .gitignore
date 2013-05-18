@@ -1,3 +1,10 @@
-build
-dist
+# Netbeans specific files and directories #
+build/
+dist/
 nbproject/private
+nbdist/
+nbactions.xml
+nb-configuration.xml
+
+# Other Files #
+.DS_STORE
