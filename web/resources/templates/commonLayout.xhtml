@@ -8,29 +8,57 @@
       xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
         <title><ui:insert name="title">RecipeMix</ui:insert></title>
+        
         <ui:insert name="metadata"/>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-            <meta name="description" content="The most POWERFUL, ROBUST, INCREDIBLE Recipe Management and Community WebApp ever to be made for a Senior Project" />
+        <meta name="description" content="The most POWERFUL, ROBUST, INCREDIBLE Recipe Management and Community WebApp ever to be made for a Senior Project" />
         <meta name="author" content="Steven Paz" />
         <meta name="author" content="Alex Chavez" />
+     
         <h:outputStylesheet library="css" name="master.css" />
         <h:outputStylesheet library="css" name="error.css" />
         <link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/resources/images/favicon.ico"/>
         <link href="http://fonts.googleapis.com/css?family=Droid+Serif|Droid+Sans|Merriweather+Sans|Lato" rel="stylesheet" type="text/css"/>
+        
+        <!-- Bootstrap css resources -->
+        <h:outputStylesheet library="css" name="bootstrap.css" />
+        <h:outputStylesheet library="css" name="bootstrap-responsive.css" />   
+        
+        <!-- Bootstrap js resources -->
         <h:outputScript library="primefaces" name="jquery/jquery.js" target="head"/>
         <h:outputScript library="primefaces" name="jquery/jquery-plugins.js" target="head"/>
+        <h:outputScript library="js" name="application.js" target="head"/>
+        <h:outputScript library="js" name="bootstrap-affix.js" target="head"/>
+        <h:outputScript library="js" name="bootstrap-alert.js" target="head"/>
+        <h:outputScript library="js" name="bootstrap-button.js" target="head"/>
+        <h:outputScript library="js" name="bootstrap-carousel.js" target="head"/>
+        <h:outputScript library="js" name="bootstrap-collapse.js" target="head"/>
+        <h:outputScript library="js" name="bootstrap-dropdown.js" target="head"/>
+        <h:outputScript library="js" name="bootstrap-modal.js" target="head"/>
+        <h:outputScript library="js" name="bootstrap-popover.js" target="head"/>
+        <h:outputScript library="js" name="bootstrap-scrollspy.js" target="head"/>
+        <h:outputScript library="js" name="bootstrap-tab.js" target="head"/>
+        <h:outputScript library="js" name="bootstrap-tooltip.js" target="head"/>
+        <h:outputScript library="js" name="bootstrap-transition.js" target="head"/>
+        <h:outputScript library="js" name="bootstrap-typeahead.js" target="head"/>
+        <h:outputScript library="js" name="bootstrap.js" target="head"/>
+        
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+          <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
     </h:head>
 
     <h:body>
         <ui:insert name="header" >
             <ui:include src="/resources/templates/commonHeader.xhtml" />
         </ui:insert>
+        
         <div id="content">
-
             <ui:insert name="content" >
                 <ui:include src="/resources/templates/commonContent.xhtml" />
             </ui:insert>
-        </div><!--content-->
+        </div>
 
         <ui:insert name="footer" >
             <ui:include src="/resources/templates/commonFooter.xhtml" />

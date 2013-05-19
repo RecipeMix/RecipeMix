@@ -1,4 +1,4 @@
-html, body {
+/*html, body {
     margin: -10px 0 0 0 ;
     min-height: 100%;
     min-width: 700px; text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
@@ -20,7 +20,7 @@ a {
     font-family: 'Droid Sans', Georgia, serif;
 }
 
-/* ThemeRoller CSS Override BEGIN */
+ ThemeRoller CSS Override BEGIN 
 
 .ui-widget {
     font-family:'Droid Sans', sans-serif;
@@ -43,7 +43,7 @@ a {
     padding: 1.25em 0 1.25em 1.25em;
 }
 
-/* ThemeRoller CSS Override END */
+ ThemeRoller CSS Override END 
 
 #logout{
     display:inline;
@@ -327,7 +327,7 @@ a:link:hover, a:visited:hover  {
     font-size:18px;
 }
 
-/* create an arrow that points down */
+ create an arrow that points down 
 .arrow-down { 
     border-left:5px solid transparent;
     border-right:5px solid transparent;
@@ -708,7 +708,7 @@ h2.profile{
     text-align: center;
 }
 
-/* Gridster styles */
+ Gridster styles 
 
 .gridster {
     color: #666666;
@@ -1356,18 +1356,18 @@ form#siteModerator .ui-button{
     margin-left: 5px;
 }
 
-/* the wrapper */
+ the wrapper 
 .ellipsify {
     font-size:12px;
     line-height:18px;
-    height: 54px;       /* 3x line height */
+    height: 54px;        3x line height 
     width: 150px;
     overflow: hidden;
-    position: relative; /* so we're a positioning parent for the dot hiders */
+    position: relative;  so we're a positioning parent for the dot hiders 
     background: white;
 }
 
-/* Used to push down .dots. Can't use absolute positioning, since that
+ Used to push down .dots. Can't use absolute positioning, since that
    would stop the floating. Can't use relative positioning, since that
    would cause floating in the wrong (namely: original) place. Can't 
    change height of #dots, since it would have the full width, and
@@ -1375,23 +1375,23 @@ form#siteModerator .ui-button{
 
    http://stackoverflow.com/questions/6222616/with-css-use-for-overflowed-block-of-multi-lines
 
-*/
+
 .pre-dots {
     float: right;
-    height: 36px;  /* 2x line height (one less than visible lines) */
+    height: 36px;   2x line height (one less than visible lines) 
 }
 
 .dots {
-    float: right; /* to make the text wrap around the dots */
-    clear: right; /* to push us below (not next to) .pre-dots */
+    float: right;  to make the text wrap around the dots 
+    clear: right;  to push us below (not next to) .pre-dots 
 }
 
-/* hides the dots if the text has *exactly* 3 lines */
+ hides the dots if the text has *exactly* 3 lines 
 .hidedots1 {
     background: white;
     width: 150px;
-    height: 18px;       /* line height */
-    position: absolute; /* otherwise, because of the width, it'll be wrapped */
+    height: 18px;        line height 
+    position: absolute;  otherwise, because of the width, it'll be wrapped 
 }
 
 .ellipsify .recipeSmallName{
@@ -1405,4 +1405,4 @@ form#siteModerator .ui-button{
     margin-right: auto;
     margin-bottom: 20px;
 }
-
+*/
