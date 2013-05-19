@@ -24,6 +24,11 @@
     border-bottom-color: #fff !important;
 }
 
+.navbar-form input {
+    margin-left: 0.625em;
+    margin-right: 0.625em;
+}
+
 .navbar .nav > li > a {
     color: #fff !important;
 }
