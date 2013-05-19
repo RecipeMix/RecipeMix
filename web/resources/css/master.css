@@ -25,7 +25,6 @@
 }
 
 .navbar-form input {
-    margin-left: 0.625em;
     margin-right: 0.625em;
 }
 
@@ -39,8 +38,7 @@
 
 .navbar .btn-primary {
     background: #8e44ad !important;
-    margin-left: 0.375em;
-    margin-right: 0.375em;
+    margin-right: 0.625em;
 }
 
 .navbar .btn-info {
