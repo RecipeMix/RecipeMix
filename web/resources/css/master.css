@@ -1,3 +1,50 @@
+
+/* BEGIN jQuery Themeroller Override */
+.ui-inputfield {
+	background: #FFF !important;
+	color: #000 !important;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+/* END jQuery Themeroller Override */
+
+/* BEGIN .navbar CSS Override */
+.navbar-inner {
+    background: #2980b9 !important; 
+    border: none !important;
+    color: #FFFFFF !important;
+}
+
+.navbar .brand {
+    color: #fff !important;
+}
+
+.navbar .caret{
+    border-top-color: #fff !important;
+    border-bottom-color: #fff !important;
+}
+
+.navbar .nav > li > a {
+    color: #fff !important;
+}
+
+.navbar-inverse .nav .active > a {
+    background-color: #3498db !important;
+}
+
+.navbar .btn-primary {
+    background: #8e44ad !important;
+    margin-left: 0.375em;
+    margin-right: 0.375em;
+}
+
+.navbar .btn-info {
+    background: #16a085 !important;
+}
+
+/* END .navbar CSS Override */
+
+
 /*html, body {
     margin: -10px 0 0 0 ;
     min-height: 100%;
