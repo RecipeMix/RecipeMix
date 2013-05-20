@@ -18,48 +18,45 @@
     <ui:define name="content">
         <div class="container">
             <div class="row">
+                <div class="span12">
                 <!-- Carousel
                 ================================================== -->
                 <div id="myCarousel" class="carousel slide">
                   <div class="carousel-inner">
                       
                     <div class="item active">
-<!--                      <img src="../assets/img/examples/slide-02.jpg" alt="" />-->
+                      <img src="/RecipeMix/resources/images/steak_1024px.jpg" alt="" />
                       <div class="container">
                         <div class="carousel-caption">
-                          <h1>Recipe Name</h1>
-                          <p class="lead">A short recipe description goes here...</p>
-                          <a class="btn btn-large btn-primary" href="#">View Recipe</a>
+                          <h1>Steak Week</h1>
+                          <p class="lead">
+                              Medium rare hits the spot. Come and check out the best
+                              steaks you can grill this summer weekend.
+                          </p>
+                          <a class="btn btn-large btn-primary" href="#">See Steak Recipes</a>
                         </div>
                       </div>
                     </div>
-                      
-                    <div class="item">
-<!--                      <img src="../assets/img/examples/slide-02.jpg" alt="" />-->
-                      <div class="container">
-                        <div class="carousel-caption">
-                          <h1>Recipe Name</h1>
-                          <p class="lead">A short recipe description goes here...</p>
-                          <a class="btn btn-large btn-primary" href="#">View Recipe</a>
+                     
+                    <!-- Loop through all fetaured recipes -->  
+                    <c:forEach items="#{featured.featuredRecipes}" var="r">
+                        <div class="item">
+                            <img src="#{r.imageGallery[0].imagePath}" alt="" />
+                          <div class="container">
+                            <div class="carousel-caption">
+                                <h1>#{r.recipeName}</h1>
+                                <p class="lead">#{r.recipeDescription}</p>
+                                <a class="btn btn-large btn-primary" href="/faces/recipe.xhtml?recipe=#{r.recipeId}">View Recipe</a>
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    </div>
-                      
-                    <div class="item">
-<!--                      <img src="../assets/img/examples/slide-02.jpg" alt="" />-->
-                      <div class="container">
-                        <div class="carousel-caption">
-                          <h1>Recipe Name</h1>
-                          <p class="lead">A short recipe description goes here...</p>
-                          <a class="btn btn-large btn-primary" href="#">View Recipe</a>
-                        </div>
-                      </div>
-                    </div>
+                    </c:forEach>
                       
                   </div>
                   <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
                   <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
                 </div><!-- /.carousel -->
+                </div>
             </div>
         </div>
         
@@ -72,8 +69,8 @@
           <!-- Three columns of text below the carousel -->
           <div class="row">
             <div class="span4">
-              <img class="img-circle" src="http://placehold.it/140x140" />
-              <h2>Awesome Recipes</h2>
+              <img class="circular" src="/RecipeMix/resources/images/steak_square_150px.jpg" />
+              <h2>Recipes</h2>
               <p>
                 Maybe you've grown bored with your own version of Lemon-Pepper Chicken.
                 Perhaps you want to try your hand at making overly-complicated scrambled eggs (looking at you Ramsay). Well this is the place
@@ -81,8 +78,8 @@
               </p>
             </div><!-- /.span4 -->
             <div class="span4">
-              <img class="img-circle" src="http://placehold.it/140x140" />
-              <h2>Awesome Community</h2>
+              <img class="circular" src="/RecipeMix/resources/images/laptop_smiling_150px.jpg" />
+              <h2>Community</h2>
               <p>
                 All your life you've wondered if anyone could possibly like eggplant as much as you do. Well here on RecipeMix
                 you'll find a whole group of people who do. All with their own recipes involving that most delectable of vegetables
@@ -90,8 +87,8 @@
               </p>
             </div><!-- /.span4 -->
             <div class="span4">
-              <img class="img-circle" src="http://placehold.it/140x140" />
-              <h2>Infinite Awesome</h2>
+              <img class="circular" src="/RecipeMix/resources/images/chef_150px.jpg" />
+              <h2>Awesomeness</h2>
               <p>
                 Keep a list of your favorite recipes, compare recipes side by side if you want to go over them in strenuous detail,
                 view their nutrition facts and even rate them. If you own or moderate a group you can add recipes to it, control users that join

@@ -29,8 +29,6 @@
     margin-right: 0.625em;
 }
 
-
-
 .navbar .nav > li > a {
     color: #fff !important;
 }
@@ -52,42 +50,72 @@
     background: #16a085 !important;
 }
 
+.circular {
+    width: 140px;
+    height: 140px;
+    -webkit-border-radius: 150px;
+    -moz-border-radius: 150px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+    -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+    -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+}
+
 /* CUSTOMIZE THE CAROUSEL
 -------------------------------------------------- */
 
- /*Carousel base class*/ 
+ /*Carousel base class*/
+ .carousel {
+    padding-top: 1.25em;
+ }
 
 .carousel .container {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
 }
 
 .carousel .item {
-  height: 31.25em;
+    height: 31.25em;
 }
 
 .carousel img {
-  min-width: 100%;
-  height: 31.25em;
+    min-width: 100%;
+    height: 31.25em;
 }
 
 .carousel-caption {
-  background-color: #27ae60 !important;
-  max-width: 34.375em;
+    background-color: #27ae60 !important;
+    max-width: 34.375em;
 }
 
 .carousel-caption h1,
 .carousel-caption .lead {
-  margin: 0;
-  line-height: 1.25;
-  color: #fff;
-  text-shadow: 0 1px 1px rgba(0,0,0,.4);
+    margin: 0;
+    line-height: 1.25;
+    color: #fff;
+    text-shadow: 0 1px 1px rgba(0,0,0,.4);
 }
 
 .carousel-caption .btn {
-  margin-top: 0.625em; 
+    margin-top: 0.625em; 
+}
+
+/* MARKETING CONTENT
+-------------------------------------------------- */
+
+/* Center align the text within the three columns below the carousel */
+.marketing .span4 {
+    text-align: center;
+}
+
+.marketing h2 {
+    font-weight: normal;
+}
+
+.marketing .span4 p {
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 
