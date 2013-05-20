@@ -23,7 +23,6 @@
                 ================================================== -->
                 <div id="myCarousel" class="carousel slide">
                   <div class="carousel-inner">
-                      
                     <div class="item active">
                       <img src="/RecipeMix/resources/images/steak_1024px.jpg" alt="" />
                       <div class="container">
@@ -46,12 +45,11 @@
                             <div class="carousel-caption">
                                 <h1>#{r.recipeName}</h1>
                                 <p class="lead">#{r.recipeDescription}</p>
-                                <a class="btn btn-large btn-primary" href="/faces/recipe.xhtml?recipe=#{r.recipeId}">View Recipe</a>
+                                <a class="btn btn-large btn-primary" href="/RecipeMix/faces/recipe.xhtml?recipe=#{r.recipeId}">View Recipe</a>
                             </div>
                           </div>
                         </div>
                     </c:forEach>
-                      
                   </div>
                   <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
                   <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
@@ -63,9 +61,7 @@
         <!-- Marketing messaging and featurettes
         ================================================== -->
         <!-- Wrap the rest of the page in another container to center all the content. -->
-
         <div class="container marketing">
-
           <!-- Three columns of text below the carousel -->
           <div class="row">
             <div class="span4">
@@ -98,20 +94,7 @@
           </div><!-- /.row -->
         </div>
 
-<!--        <div class="marketing-page">
-            <div id="marketing-page-gallery">
-                <p:galleria id="indexGalleria"  value="#{featured.featuredRecipes}" var="r"
-                            panelHeight="200" showCaption="false" frameHeight="20" frameWidth="20"
-                            effectSpeed="800" transitionInterval="7000" >
-                    <h:link outcome="recipeProfile.view">
-                        <f:param name="recipe" value="#{r.recipeId}" />
-                        <p:graphicImage alt="#{r.imageGallery[0].caption}" styleClass="welcomeImage"
-                                        url="#{r.imageGallery[0].imagePath}"/>
-                    </h:link>
-                </p:galleria>
-            </div>
-
-            <h1>Your recipes. Your way.</h1>
+<!--       
             <c:choose>
                 <c:when test="#{!userIdentity.isUserAuthenticated}">
                 </c:when>

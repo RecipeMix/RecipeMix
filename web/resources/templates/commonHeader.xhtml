@@ -27,9 +27,49 @@
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown">Recipes <b class="caret"></b></a>
                       <ul class="dropdown-menu">
                         <li><h:link value="Create A Recipe" outcome="recipe.create" /></li>
+                        <li><h:link value="Favorite Recipes" outcome="favorites.view" /></li>
+                        <li><h:link value="My Recipes" outcome="myrecipes.view" /></li>
                         <li class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                        <li><a href="#">One more separated link</a></li>
+                        <li>
+                            <h:link value="All Recipes" outcome="recipes.view">
+                                <f:param name="by" value="all" />
+                            </h:link>
+                        </li>
+                        <li>
+                            <h:link value="Main Courses" outcome="recipes.view">
+                                <f:param name="by" value="maincourses" />
+                            </h:link>
+                        </li>
+                        <li>
+                            <h:link value="Side Dishes" outcome="recipes.view">
+                                <f:param name="by" value="sidedishes" />
+                            </h:link>
+                        </li>
+                        <li>
+                            <h:link value="Beverages" outcome="recipes.view">
+                                <f:param name="by" value="beverages" />
+                            </h:link>
+                        </li>
+                        <li>
+                            <h:link value="Appetizers" outcome="recipes.view">
+                                <f:param name="by" value="appetizers" />
+                            </h:link>
+                        </li>
+                        <li>
+                            <h:link value="Desserts" outcome="recipes.view">
+                                <f:param name="by" value="desserts" />
+                            </h:link>
+                        </li>
+                        <li>
+                            <h:link value="Lunch" outcome="recipes.view">
+                                <f:param name="by" value="lunch" />
+                            </h:link>
+                        </li>
+                        <li>
+                            <h:link value="Dinner" outcome="recipes.view">
+                                <f:param name="by" value="dinner" />
+                            </h:link>
+                        </li>
                       </ul>
                     </li>
                     <li class="dropdown">
@@ -55,13 +95,34 @@
                     <!-- <p:commandButton id="overlayLogin" ajax="false" value="Login" /> -->
                     <div class="btn-group">
                         <input type="submit" class="btn btn-primary" value="Sign In" />
-                        <button type="submit" class="btn btn-info">Register</button>
+                        <p:commandButton id="register-btn"
+                                         styleClass="btn btn-info"
+                                         value="Register"
+                                         onclick="$('#myModal').modal();" />
                     </div>
                 </h:form>
                 </div><!--d/.nav-collapse -->
               </div><!-- /.navbar-inner -->        
             </div><!-- /.navbar -->
           </div><!-- /.container -->
+          
+        <div id="myModal" class="modal hide fade"
+             tabindex="-1" role="dialog"
+             aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Join RecipeMix today!</h3>
+          </div>
+          <div class="modal-body">
+              <h:form>
+                  
+              </h:form>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-warning" data-dismiss="modal" aria-hidden="true">Cancel</button>
+            <button class="btn btn-success">Create Account</button>
+          </div>
+        </div>
 
           <div class="container" id="search-container">
               <div class="row">
@@ -297,10 +358,6 @@
                     
                     $('.dropdown-toggle').dropdown();
                     
-//                    function helpOverlay() {
-//                        $('body').chardinJs('start');
-//                    }
-                    
                     function naviSearch() {
                         alert('Seraching in naviSearch()');
                         var submittedInputValue = $('#search\\:searchInput').val();
@@ -309,11 +366,6 @@
                 </script>
 <!--            </div>-->
             
-<!--            <div id="helpButton">
-                <h:form>
-                    <p:commandButton id="helpButton" value="Help" icon="ui-icon-help" onclick="helpOverlay();" />
-                </h:form>
-            </div> -->
     </ui:composition>
     </body>
 </html>
