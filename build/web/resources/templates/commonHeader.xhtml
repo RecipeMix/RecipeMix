@@ -63,7 +63,7 @@
             </div><!-- /.navbar -->
           </div><!-- /.container -->
 
-          <div class="container">
+          <div class="container" id="search-container">
               <div class="row">
                   <h:form styleClass="navbar-search pull-right">
                       <p:inputText id="search_id" styleClass="search-query" />
@@ -294,6 +294,8 @@
 -->
                 <script type="text/javascript">
                     $ = jQuery;
+                    
+                    $('.dropdown-toggle').dropdown();
                     
 //                    function helpOverlay() {
 //                        $('body').chardinJs('start');
