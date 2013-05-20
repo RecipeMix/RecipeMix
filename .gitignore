@@ -1,8 +1,8 @@
 # Netbeans specific files and directories #
-build/
-dist/
+build
+dist
 nbproject/private
-nbdist/
+nbdist
 nbactions.xml
 nb-configuration.xml
 
