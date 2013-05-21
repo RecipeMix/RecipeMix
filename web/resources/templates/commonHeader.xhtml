@@ -21,8 +21,6 @@
                 <h:link class="brand" outcome="home">RecipeMix</h:link>
                 <div class="nav-collapse collapse">
                   <ul class="nav">
-                    <li><a href="#">Home</a></li>
-
                     <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown">Recipes <b class="caret"></b></a>
                       <ul class="dropdown-menu">
@@ -124,359 +122,146 @@
             <h3 id="myModalLabel">Join RecipeMix today!</h3>
           </div>
           <div class="modal-body">
-              <h:form class="form-horizontal" prependId="false">
+              <h:form class="form-horizontal">
                   
                 <div class="control-group">
                     <label class="control-label" for="username">Username</label>
                     <div class="controls">
-                        <input class="required" type="text" id="username" placeholder="Username"
-                               value="#{registration.newUser.userName}"></input>
+                        <p:inputText id="username"
+                                     value="#{registration.newUser.userName}" />
+                        <p:watermark for="username"
+                                     value="Username" />
                     </div>
                 </div>
                   
                 <div class="control-group">
                     <label class="control-label" for="firstName">First Name</label>
                     <div class="controls">
-                        <input type="text" id="firstName" placeholder="First Name"
-                               value="#{registration.newUser.firstName}"></input>
+                        <p:inputText id="firstName"
+                                     value="#{registration.newUser.firstName}" />
+                        <p:watermark for="firstName"
+                                     value="First Name" />
                     </div>
                 </div>
                   
                 <div class="control-group">
                     <label class="control-label" for="lastName">Last Name</label>
                     <div class="controls">
-                        <input type="text" id="lastname" placeholder="Last Name"
-                               value="#{registration.newUser.lastName}"></input>
+                        <p:inputText id="lastName"
+                                     value="#{registration.newUser.lastName}" />
+                        <p:watermark for="lastName"
+                                     value="Last Name" />
                     </div>
                 </div>
                   
                 <div class="control-group">
                     <label class="control-label" for="email">Email</label>
                     <div class="controls">
-                        <input type="text" id="email" placeholder="example@johnyappleseed.com"
-                               value="#{registration.newUser.email}"></input>       
+                        <p:inputText id="email"
+                                     value="#{registration.newUser.email}" />
+                        <p:watermark for="email"
+                                     value="example@example.com" />     
                     </div>
                 </div>
                   
                 <div class="control-group">
                     <label class="control-label" for="dob">Date of Birth</label>
                     <div class="controls">
-                        <input class="datepicker" type="text" id="dob" placeholder="mm/dd/yyyy"
-                               value="#{registration.newUser.dateOfBirth}"></input>       
+                        <p:calendar id="dob"
+                                    value="#{registration.dateOfBirth}"
+                                    label="Birthday"
+                                    yearRange="#{bundle['dob.range']}"
+                                    mindate="#{bundle['dob.MIN']}"
+                                    pattern="#{bundle['date.format']}"
+                                    autocomplete="off" navigator="true" />
+                        <p:watermark for="dob" value="MM/DD/YYYY" />
                     </div>
                 </div>
                   
                 <div class="control-group">
                     <label class="control-label" for="postalCode">Postal Code</label>
                     <div class="controls">
-                        <input type="text" id="postalCode" placeholder="Postal Code"
-                               value="#{registration.newUser.postalCode}"></input>       
+                        <p:inputText id="postalCode"
+                                     value="#{registration.newUser.postalCode}" />
+                        <p:watermark for="postalCode"
+                                     value="90210" />          
                     </div>
                 </div>
                   
                 <div class="control-group">
                     <label class="control-label" for="country">Country</label>
                     <div class="controls">
-                        <input type="text" id="country" placeholder="Country"
-                               value="#{registration.newUser.country}"></input>       
+                        <p:selectOneMenu id="countries"
+                                         value="#{registration.newUser.country}"
+                                         required="true"
+                                         requiredMessage="Country is required">
+                            <f:selectItems value="#{registration.countries}"  />
+                        </p:selectOneMenu>     
                     </div>
                 </div>
                   
                 <div class="control-group">
                   <label class="control-label" for="password">Password</label>
                   <div class="controls">
-                    <input type="password" id="password" placeholder="Password"
-                           value="#{registration.newUser.password}"></input>
+                    <p:password  id="password"
+                                 autocomplete="off"
+                                 value="#{registration.newUser.password}"
+                                 title="Password" />
+                    <p:watermark for="password"
+                                 value="Password" />   
                   </div>
                 </div>
                   
                 <div class="control-group">
                   <label class="control-label" for="passwordConfirm">Confirm Password</label>
                   <div class="controls">
-                    <input type="password" id="passwordConfirm" placeholder="Password Again"
-                           value="#{registration.newUser.password}"></input>
+                    <p:password  id="confirmPassword"
+                                 autocomplete="off"
+                                 value="#{registration.newUser.password}"
+                                 title="Confirm Password" />
+                    <p:watermark for="confirmPassword"
+                                 value="Confirm Password" />  
                   </div>
                 </div>
                   
-                  
-                  
-<!--                <fieldset>
-                  <label>Username</label>
-                  <input type="text" value="#{registration.newUser.userName}"
-                         placeholder="Username"
-                         required="true" />
-                  
-                  <p:outputLabel for="username" value="User Name: "/>
-                  <p:inputText id="username" value="#{registration.newUser.userName}" title="User Name" 
-                               required="true" requiredMessage="The User Name field is required."/>
-                  
-                  <span class="help-block">Example block-level help text here.</span>
-                  <label class="checkbox">
-                    <input type="checkbox"> Check me out</input>
-                  </label>
-                </fieldset>-->
+                <p:commandButton styleClass="btn btn-primary"
+                                 value="Create Account"
+                                 actionListener="#{registration.registerUser}" />  
               </h:form>
-          </div>
-          <div class="modal-footer">
-            <p:commandButton styleClass="btn btn-primary"
-                             value="Create Account"
-                             actionListener="#{registration.registerUser}" />
-<!--            <button class="btn btn-primary">Create Account</button>-->
-          </div>
-        </div>
+          </div><!-- /.modal-body -->
+        </div><!-- ./myModal -->
 
-          <div class="container" id="search-container">
-              <div class="row">
-                  <h:form styleClass="navbar-search pull-right">
-                      <p:inputText id="search_id" styleClass="search-query" />
-                      <p:watermark for="search_id" value="Search for recipes, tags, groups..." />
-                      <h:commandButton value="Search"
-                                       styleClass="btn btn-primary"
-                                       onclick="naviSearch();" />
-                  </h:form>
-              </div><!-- /.row -->
-          </div><!-- /.container -->
-            
-<!--            <div id="header">
-                <h:link outcome="home">
-                    <h1 data-intro="Go back to the main page."
-                        data-position="right">
-                        RecipeMix
-                    </h1>
-                </h:link>
-          
-                <h:form id="search">
-                    <p:inputText id="searchInput" styleClass="searchInput" />
-                    <p:watermark for="searchInput" value="Search recipes, users, groups..." />
-                    <p:commandButton value="Search" styleClass="searchBtn" icon="ui-icon-search" onclick="naviSearch();" />   
+        <div class="container" id="search-container">
+            <div class="row">
+                <h:form styleClass="navbar-search pull-right">
+                    <p:inputText id="searchInput" styleClass="search-query" />
+                    <p:watermark for="searchInput" value="Search for recipes, tags, groups..." />
+                    <p:commandButton value="Search"
+                                     styleClass="btn btn-primary"
+                                     onclick="naviSearch();" />
                 </h:form>
-                
-                <div id="nav">
-                    <ul id="menu">
-                        <li class="trigger" onmouseover="login.hide();">
-                            <h:outputText value="Recipes" />
-                            <ul class="submenu">
-                                <li>
-                                    <div><h:link value="Create A Recipe" outcome="recipe.create" /></div>
-                                </li>
-                                <li>
-                                    <h:link value="My Recipes" outcome="myrecipes.view" />
-                                </li>
-                                <li>
-                                    <h:link value="Favorites" outcome="favorites.view" />
-                                </li>
-                                <li>
-                                    <h:link value="All Recipes" outcome="recipes.view" >
-                                        <f:param name="by" value="all" />
-                                    </h:link>
-                                </li>
-                                <li>
-                                    <h:link value="Main Courses" outcome="recipes.view" >
-                                        <f:param name="by" value="maincourses" />
-                                    </h:link>
-                                </li>
-                                <li>
-                                    <h:link value="Side Dishes" outcome="recipes.view" >
-                                        <f:param name="by" value="sidedishes" />
-                                    </h:link>
-                                </li>
-                                <li>
-                                    <h:link value="Beverages" outcome="recipes.view" >
-                                        <f:param name="by" value="beverages" />
-                                    </h:link>
-                                </li>
-                                <li>
-                                    <h:link value="Appetizers" outcome="recipes.view" >
-                                        <f:param name="by" value="appetizers" />
-                                    </h:link>
-                                </li>
-                                <li>
-                                    <h:link value="Desserts" outcome="recipes.view" >
-                                        <f:param name="by" value="desserts" />
-                                    </h:link>
-                                </li>
-                                <li>
-                                    <h:link value="Lunch" outcome="recipes.view" >
-                                        <f:param name="by" value="lunch" />
-                                    </h:link>
-                                </li>
-                                <li>
-                                    <h:link value="Dinner" outcome="recipes.view" >
-                                        <f:param name="by" value="dinner" />
-                                    </h:link>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="trigger" onmouseover="login.hide();">
-                            <h:outputText value="Groups" />
-                            <ul class="submenu">
-                                <li><h:link value="Create A Group" outcome="group.create" /></li>
-                                <li>
-                                    <h:link value="All Groups" outcome="groups.view" >
-                                        <f:param name="by" value="groups" />
-                                    </h:link>
-                                </li>                                
-                                <li>
-                                    <h:link value="Groups You're In" outcome="mygroups.manage" >
-                                        <f:param name="by" value="member" />
-                                    </h:link>
-                                </li>
-                                <li>
-                                    <h:link value="Groups You Manage" outcome="mygroups.manage" >
-                                        <f:param name="by" value="managed" />
-                                    </h:link>
-                                </li>
-                            </ul>
-                        </li>
-                        <c:choose>
-                            <c:when test="#{userIdentity.isUserAuthenticated}">
-                                <c:choose>
-                                    <c:when test="#{userIdentity.isAdmin}">
-                                        <li class="trigger">
-                                            <h:link value="Admin Panel" outcome="/admin/cPanel.xhtml" />
-                                        </li>
-                                    </c:when>
-                                    <c:when test="#{userIdentity.isSiteMod}">
-                                        <li class="trigger">
-                                            <h:link value="Site Mod Panel" outcome="/sitemod/cPanel.xhtml" />
-                                        </li>
-                                    </c:when>
-                                </c:choose>
-                                <li class="trigger">
-                                    
-                                    <h:link value="#{userIdentity.user.firstName} #{userIdentity.user.lastName}"
-                                            type="button" outcome="userProfile.view" >
-                                        <f:param name="user" value="#{userIdentity.user.userName}" />
-                                    </h:link>
-                                </li>
-                                <li class="trigger">
-                                    <h:form id="logout"><p:commandLink value="Logout" action="#{userIdentity.logout}" ajax="false" /></h:form>
-                                </li>
-                            </c:when>
-                            <c:otherwise>
-                                <li class="trigger" data-intro="Login with your RecipeMix account here or register
-                                    for a new account and add your creations. ;-)"
-                                    data-position="bottom">
-                                    <p:commandLink id="loginBtn" value="#{bundle['login.submit']}" onmouseover="login.show();" />
-                                </li>
-                                <p:overlayPanel id="loginOverlay" for="loginBtn" hideEffect="fade"
-                                                at="left bottom" my="top" widgetVar="login">
-                                    <h:form id="loginForm" prependId="false" onsubmit="document.getElementById('loginForm').action = 'j_security_check';" >
-                                        <p:panelGrid columns="2">
-                                            <p:outputLabel for="j_username" title="User Name">#{bundle['login.username']}:  </p:outputLabel>
-                                            <p:inputText required="true" id="j_username" />
-                                            <p:outputLabel for="j_password">#{bundle['login.password']}: </p:outputLabel>
-                                            <p:password  id="j_password" title="Password" 
-                                                         required="true" requiredMessage="The Password field is required." />
-                                        </p:panelGrid>
-                                        Note: Usernames and passwords are case sensitive.
-                                        <p:commandButton id="overlayLogin" ajax="false" value="Login" />
-                                    </h:form>
-                                    <p:commandButton id="overLayRegister" value="Create An Account" onclick="register.show();" />
-                                </p:overlayPanel>
-                                <p:dialog id="registerOverlay" width="550" height="350" closeOnEscape="true" resizable="false"
-                                          modal="true" onShow="login.hide()" header="Join RecipeMix today." widgetVar="register" >
-                                    <h:form prependId="false" id="registration">
-                                        <p:growl id="messages" showDetail="true" autoUpdate="true" />
-                                        <ul class="formFields">
-                                            <li>
-                                                <p:outputLabel for="username" value="User Name: "/>
-                                                <p:inputText id="username" value="#{registration.newUser.userName}" title="User Name" 
-                                                             required="true" requiredMessage="The User Name field is required."/>
-                                            </li>
-                                            <li>
-                                                <p:outputLabel for="fname" value="First Name: "/>
-                                                <p:inputText id="fname" value="#{registration.newUser.firstName}" title="First Name" 
-                                                             required="true" requiredMessage="The First Name field is required."/>
-                                            </li>
-                                            <li>
-                                                <p:outputLabel for="lname" value="Last Name: "/>
-                                                <p:inputText id="lname" value="#{registration.newUser.lastName}" title="Last Name" 
-                                                             required="true" requiredMessage="The Last Name field is required."/>
+            </div><!-- /.row -->
+        </div><!-- /.container -->
+            
+        <script type="text/javascript">
+            $ = jQuery;
 
-                                            </li>
-                                            <li>
-                                                <p:outputLabel for="email" value="Email: "/>
-                                                <p:inputText id="email" value="#{registration.newUser.email}" title="Email" 
-                                                             required="true" requiredMessage="The Email field is required."
-                                                             validatorMessage="Email address is not valid!">
-                                                    <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
-                                                </p:inputText>
-                                                <p:watermark for="email" value="example@example.com" />
+            //Add Hover effect to menus
+            $('ul.nav li.dropdown').hover(function() {
+              $(this).find('.dropdown-menu').stop(true, true).fadeIn();
+            }, function() {
+              $(this).find('.dropdown-menu').stop(true, true).fadeOut();
+            });
 
-                                            </li>
-                                            <li>
-                                                <p:outputLabel for="dob" value="Date of Birth: "/>
-                                                <p:calendar id="dob" value="#{registration.dateOfBirth}" label="Birthday" 
-                                                            yearRange="#{bundle['dob.range']}" mindate="#{bundle['dob.MIN']}" 
-                                                            pattern="#{bundle['date.format']}" 
-                                                            autocomplete="off" navigator="true" required="true"
-                                                            requiredMessage="Birthday is required!" />
-                                                <p:watermark for="dob" value="MM/DD/YYYY" />
-                                            </li>
-                                            <li>
-                                                <p:outputLabel for="postalCode" value="Postal Code: "/>
-                                                <p:inputText id="postalCode" value="#{registration.newUser.postalCode}" title="Postal Code" 
-                                                             required="true" requiredMessage="The Postal Code field is required."/>
+            // Initialize dropdown toggle
+            $('.dropdown-toggle').dropdown();
 
-                                            </li>
-                                            <li>
-                                                <p:outputLabel for="countries" value="Country: " />
-                                                <p:selectOneMenu id="countries"
-                                                                 value="#{registration.newUser.country}"
-                                                                 required="true"
-                                                                 requiredMessage="Country is required">
-                                                    <f:selectItems value="#{registration.countries}"  />
-                                                </p:selectOneMenu>
-                                            </li>
-                                            <li>
-                                                <p:outputLabel for="password" value="Password: "/>
-                                                <p:password  id="password" autocomplete="off" value="#{registration.newUser.password}" title="Password" 
-                                                             required="true" match ="confirmPassword" requiredMessage="The Password field is required."
-                                                             validatorMessage="Confirm password field must match!" feedback="true"/>
-                                            </li>
-                                            <li>
-                                                <p:outputLabel for="confirmPassword" value="Confirm Password: "/>
-                                                <p:password  id="confirmPassword" value="#{registration.newUser.password}" title="Confirm Password" 
-                                                             required="true" requiredMessage="The Confirm Password field is required." 
-                                                             validatorMessage="Confirm password field must match!"  feedback="true"/>
-                                            </li>
-                                        </ul>
-                                        <p:commandButton id="registration-button" value="Register" oncomplete="register.hide()"
-                                                         update="messages" actionListener="#{registration.registerUser}"/>
-                         
-                                    </h:form>
-                                </p:dialog>
-                            </c:otherwise>
-                        </c:choose>
-                    </ul>
-                </div>
-                <h:outputStylesheet library="css" name="chardinjs.css" />
-                <h:outputScript library="js" name="chardinjs.min.js" target="head"/>
--->
-                <script type="text/javascript">
-                    $ = jQuery;
-                    
-                    //Add Hover effect to menus
-                    $('ul.nav li.dropdown').hover(function() {
-                      $(this).find('.dropdown-menu').stop(true, true).fadeIn();
-                    }, function() {
-                      $(this).find('.dropdown-menu').stop(true, true).fadeOut();
-                    });
-                    
-                    // Initialize dropdown toggle
-                    $('.dropdown-toggle').dropdown();
-                    
-                    // Initialize datepicker
-                    $('.datepicker').pickadate();
-                    
-                    function naviSearch() {
-                        alert('Seraching in naviSearch()');
-                        var submittedInputValue = $('#search\\:searchInput').val();
-                        window.location.href = "/faces/search.xhtml?searchArg=" + submittedInputValue;
-                    }
-                </script>
-<!--            </div>-->
+            // Pass forn values into arguments for the seach page
+            function naviSearch() {
+                var submittedInputValue = $('#search\\:searchInput').val();
+                window.location.href = "/faces/search.xhtml?searchArg=" + submittedInputValue;
+            }
+        </script>
             
     </ui:composition>
     </body>
