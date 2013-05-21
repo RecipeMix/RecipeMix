@@ -75,10 +75,18 @@
                     <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown">Groups <b class="caret"></b></a>
                       <ul class="dropdown-menu">
-                        <li><a href="#">Create Group</a></li>
+                        <li><h:link value="Create A Group" outcome="group.create" /></li>
                         <li class="divider"></li>
-                        <li><a href="#">Browse Group</a></li>
-                        <li><a href="#">One more separated link</a></li>
+                        <li>
+                            <h:link value="All Groups" outcome="groups.view">
+                                <f:param name="by" value="all" />
+                            </h:link>
+                        </li>
+                        <li>
+                            <h:link value="Your Groups" outcome="mygroups.manage">
+                                <f:param name="by" value="all" />
+                            </h:link>
+                        </li>
                       </ul>
                     </li>
                   </ul>
@@ -92,9 +100,11 @@
                     <p:password id="j_password" styleClass="span2" />
                     <p:watermark for="j_password" value="Password" />
 
-                    <!-- <p:commandButton id="overlayLogin" ajax="false" value="Login" /> -->
                     <div class="btn-group">
-                        <input type="submit" class="btn btn-primary" value="Sign In" />
+                        <p:commandButton id="login-btn"
+                                         ajax="false"
+                                         styleClass="btn btn-primary"
+                                         value="Sign In" />
                         <p:commandButton id="register-btn"
                                          styleClass="btn btn-info"
                                          value="Register"
@@ -114,13 +124,104 @@
             <h3 id="myModalLabel">Join RecipeMix today!</h3>
           </div>
           <div class="modal-body">
-              <h:form>
+              <h:form class="form-horizontal" prependId="false">
                   
+                <div class="control-group">
+                    <label class="control-label" for="username">Username</label>
+                    <div class="controls">
+                        <input class="required" type="text" id="username" placeholder="Username"
+                               value="#{registration.newUser.userName}"></input>
+                    </div>
+                </div>
+                  
+                <div class="control-group">
+                    <label class="control-label" for="firstName">First Name</label>
+                    <div class="controls">
+                        <input type="text" id="firstName" placeholder="First Name"
+                               value="#{registration.newUser.firstName}"></input>
+                    </div>
+                </div>
+                  
+                <div class="control-group">
+                    <label class="control-label" for="lastName">Last Name</label>
+                    <div class="controls">
+                        <input type="text" id="lastname" placeholder="Last Name"
+                               value="#{registration.newUser.lastName}"></input>
+                    </div>
+                </div>
+                  
+                <div class="control-group">
+                    <label class="control-label" for="email">Email</label>
+                    <div class="controls">
+                        <input type="text" id="email" placeholder="example@johnyappleseed.com"
+                               value="#{registration.newUser.email}"></input>       
+                    </div>
+                </div>
+                  
+                <div class="control-group">
+                    <label class="control-label" for="dob">Date of Birth</label>
+                    <div class="controls">
+                        <input class="datepicker" type="text" id="dob" placeholder="mm/dd/yyyy"
+                               value="#{registration.newUser.dateOfBirth}"></input>       
+                    </div>
+                </div>
+                  
+                <div class="control-group">
+                    <label class="control-label" for="postalCode">Postal Code</label>
+                    <div class="controls">
+                        <input type="text" id="postalCode" placeholder="Postal Code"
+                               value="#{registration.newUser.postalCode}"></input>       
+                    </div>
+                </div>
+                  
+                <div class="control-group">
+                    <label class="control-label" for="country">Country</label>
+                    <div class="controls">
+                        <input type="text" id="country" placeholder="Country"
+                               value="#{registration.newUser.country}"></input>       
+                    </div>
+                </div>
+                  
+                <div class="control-group">
+                  <label class="control-label" for="password">Password</label>
+                  <div class="controls">
+                    <input type="password" id="password" placeholder="Password"
+                           value="#{registration.newUser.password}"></input>
+                  </div>
+                </div>
+                  
+                <div class="control-group">
+                  <label class="control-label" for="passwordConfirm">Confirm Password</label>
+                  <div class="controls">
+                    <input type="password" id="passwordConfirm" placeholder="Password Again"
+                           value="#{registration.newUser.password}"></input>
+                  </div>
+                </div>
+                  
+                  
+                  
+<!--                <fieldset>
+                  <label>Username</label>
+                  <input type="text" value="#{registration.newUser.userName}"
+                         placeholder="Username"
+                         required="true" />
+                  
+                  <p:outputLabel for="username" value="User Name: "/>
+                  <p:inputText id="username" value="#{registration.newUser.userName}" title="User Name" 
+                               required="true" requiredMessage="The User Name field is required."/>
+                  
+                  <span class="help-block">Example block-level help text here.</span>
+                  <label class="checkbox">
+                    <input type="checkbox"> Check me out</input>
+                  </label>
+                </fieldset>-->
               </h:form>
           </div>
           <div class="modal-footer">
-            <button class="btn btn-warning" data-dismiss="modal" aria-hidden="true">Cancel</button>
-            <button class="btn btn-success">Create Account</button>
+            <p:commandButton styleClass="btn btn-primary"
+                             value="Create Account"
+                             actionListener="#{registration.registerUser}" />
+<!--            <button class="btn btn-primary">Create Account</button>-->
           </div>
         </div>
 
@@ -362,8 +463,12 @@
                     }, function() {
                       $(this).find('.dropdown-menu').stop(true, true).fadeOut();
                     });
-
+                    
+                    // Initialize dropdown toggle
                     $('.dropdown-toggle').dropdown();
+                    
+                    // Initialize datepicker
+                    $('.datepicker').pickadate();
                     
                     function naviSearch() {
                         alert('Seraching in naviSearch()');
