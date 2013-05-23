@@ -34,19 +34,6 @@
                                 </p:inputText>
                             </li>
                             <li>
-                                <p:outputLabel for="dob" value="Date of Birth: "/>
-                                <p:calendar id="dob" value="#{editProfile.dob}" label="Birthday"
-                                            yearRange="1900:2013" mindate="1/1/1900" pattern="m/d/yyyy"
-                                            autocomplete="false" navigator="true" style="white-space: nowrap;"
-                                            required="true" requiredMessage="Birthday is required!" />
-                            </li>
-                            <li>
-                                <p:outputLabel for="postalCode" value="Postal Code: "/>
-                                <p:inputText id="postalCode" value="#{editProfile.postalCode}" title="Postal Code" 
-                                     required="true" requiredMessage="The Postal Code field is required." />
-                            
-                            </li>
-                            <li>
                                 <p:outputLabel for="about" value="About Me: "/>
                                 <p:inputTextarea id="about" autoResize="true" maxlength="1500" 
                                                  value="#{editProfile.about}" title="About Me" />

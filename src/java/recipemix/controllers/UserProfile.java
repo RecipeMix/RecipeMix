@@ -38,12 +38,10 @@ public class UserProfile implements Serializable {
     private static final long serialVersionUID = 1L;
     private static final Logger logger = Logger.getLogger("ViewProfile");
     private Users existingUser; // the user
-    @Inject
-    RequestParameterManager rpm;
-    @Inject
-    UserIdentity ui;
-    @EJB
-    UsersEJB usersEJB;
+    
+    @Inject RequestParameterManager rpm;
+    @Inject UserIdentity ui;
+    @EJB UsersEJB usersEJB;
 
     /**
      * This method is called AFTER the bean is constructed This is needed
@@ -136,14 +134,6 @@ public class UserProfile implements Serializable {
             }
         }
         return false;
-    }
-    
-    public String getProperCountry(){
-        if(existingUser != null){
-            return existingUser.getCountry().toString();
-        }
-        else
-            return null;
     }
     
     public boolean isShowProfessionalBtn(){

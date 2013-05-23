@@ -24,7 +24,6 @@ import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 import recipemix.beans.RecipeEJB;
 import recipemix.beans.UsersEJB;
-import recipemix.models.Country;
 import recipemix.models.Recipe;
 import recipemix.models.Users;
 
@@ -47,18 +46,12 @@ public class EditProfile implements Serializable {
     private String lastName;
     private String password;
     private String email;
-    private Country country;
-    private Integer postalCode;
-    private Date dob;
     private String about;
-    @EJB
-    private UsersEJB usersEJB;
-    @EJB
-    private RecipeEJB recipeEJB;
-    @Inject
-    private UserIdentity ui;
-    @Inject
-    private RequestParameterManager rpm;
+    
+    @EJB private UsersEJB usersEJB;
+    @EJB private RecipeEJB recipeEJB;
+    @Inject private UserIdentity ui;
+    @Inject private RequestParameterManager rpm;
 
     @PostConstruct
     public void init() {
@@ -68,10 +61,7 @@ public class EditProfile implements Serializable {
         this.firstName = existingUser.getFirstName();
         this.lastName = existingUser.getLastName();
         this.email = existingUser.getEmail();
-        this.postalCode = existingUser.getPostalCode();
-        this.dob = new Date(existingUser.getDateOfBirth());
         this.about = existingUser.getAbout();
-        this.country = existingUser.getCountry();
     }
 
     /**
@@ -90,27 +80,24 @@ public class EditProfile implements Serializable {
             if (lastName != null && !lastName.equals("")) {
                 this.existingUser.setLastName(lastName);
             }
+            
             if (email != null && !email.equals("")) {
                 this.existingUser.setEmail(email);
             }
-            if (dob != null) {
-                this.existingUser.setDateOfBirth(dob.getTime());
-            }
-            if (postalCode != null && postalCode != 0) {
-                this.existingUser.setPostalCode(postalCode);
-            }
+            
             //Make sure password isn't null or blank !
             if (this.password != null && !this.password.equals("")) {
-                existingUser.setPassword(recipemix.controllers.MD5Hash.hashPassword(this.password));
+                this.existingUser.setPassword(recipemix.controllers.MD5Hash.hashPassword(this.password));
             }
-            this.existingUser.setAbout(about);
+            
+            if (this.about != null && !this.about.equals("")) {
+                this.existingUser.setAbout(about);
+            }
 
             //Attempt the edit
             existingUser = usersEJB.editUser(existingUser);
             result = "success";
-
-
-            //}
+            
         } catch (javax.ejb.EJBAccessException ejbae) {
             result = "forbidden";
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Only registered users can create/edit profiles."));
@@ -245,46 +232,6 @@ public class EditProfile implements Serializable {
      */
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Country getCountry() {
-        return country;
-    }
-
-    /**
-     *
-     * @param country
-     */
-    public void setCountry(Country country) {
-        this.country = country;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Integer getPostalCode() {
-        return postalCode;
-    }
-
-    /**
-     *
-     * @param postalCode
-     */
-    public void setPostalCode(Integer postalCode) {
-        this.postalCode = postalCode;
-    }
-
-    public Date getDob() {
-        return dob;
-    }
-
-    public void setDob(Date dob) {
-        this.dob = dob;
     }
 
     public String getAbout() {

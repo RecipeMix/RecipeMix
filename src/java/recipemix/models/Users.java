@@ -59,18 +59,8 @@ public class Users implements Serializable {
     @Column(name = "USER_NAME", nullable = false)
     private String userName;
 
-    @Column(name = "POSTAL_CODE")
-    private Integer postalCode;
-    
     @Column(name = "DATE_REGISTERED")
     private Timestamp dateRegistered;
-    
-    @Column
-    @Enumerated (EnumType.STRING)
-    private Country country;
-
-    @Column(name = "DATE_OF_BIRTH", nullable = false)
-    private long dateOfBirth;
 
     @Column(length = 1500)
     private String about;
@@ -214,38 +204,6 @@ public class Users implements Serializable {
     }
 
     /**
-     * Returns the user's postal code
-     * @return integer postalCode
-     */
-    public Integer getPostalCode() {
-        return postalCode;
-    }
-
-    /**
-     * Sets the user's postal code to postalCode
-     * @param postalCode new postal code
-     */
-    public void setPostalCode(Integer postalCode) {
-        this.postalCode = postalCode;
-    }
-
-    /**
-     * Returns the user's date of birth
-     * @return date dateOfBirth of user
-     */
-    public long getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    /**
-     * Sets the user's date of birth to dateOfBirth
-     * @param dateOfBirth new date of birth
-     */
-    public void setDateOfBirth(long dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    /**
      * Returns the about section for the user
      * @return string about of user
      */
@@ -267,9 +225,9 @@ public class Users implements Serializable {
      * @return true if valid, false otherwise
      */
     public boolean isInformationValid() {
-        return (firstName != null && lastName != null
-                     && postalCode!= null && password != null
-                );
+        return (firstName != null && 
+                lastName != null && 
+                password != null);
     }
 
     /**
@@ -311,22 +269,6 @@ public class Users implements Serializable {
      */
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    /**
-     * Returns the country of the user
-     * @return country country of user
-     */
-    public Country getCountry() {
-        return country;
-    }
-
-    /**
-     * Sets the country of the user to country
-     * @param country of user
-     */
-    public void setCountry(Country country) {
-        this.country = country;
     }
 
     /**

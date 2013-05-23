@@ -11,7 +11,6 @@
 package recipemix.controllers;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
@@ -25,7 +24,6 @@ import javax.persistence.PersistenceException;
 import recipemix.beans.ImageEJB;
 import recipemix.beans.UsersEJB;
 import recipemix.controllers.exceptions.UserExistsException;
-import recipemix.models.Country;
 import recipemix.models.Image;
 import recipemix.models.Users;
 
@@ -40,7 +38,7 @@ public class Registration implements Serializable {
     private static final long serialVersionUID = 1L;
     private static final Logger logger = Logger.getLogger("SecurityBacking");
     private Users newUser; // used during registration and while session is active
-    private Date dateOfBirth;
+    
     @EJB
     private UsersEJB usersEJB;
     @EJB
@@ -81,7 +79,6 @@ public class Registration implements Serializable {
      */
     public Registration() {
         newUser = new Users();
-        newUser.setCountry(Country.United_States);
     }
 
     @PostConstruct
@@ -103,7 +100,6 @@ public class Registration implements Serializable {
         if (newUser.isInformationValid()) {
             newUser.setPassword(recipemix.controllers.MD5Hash.hashPassword(newUser.getPassword()));
             try {
-                newUser.setDateOfBirth(dateOfBirth.getTime());
                 usersEJB.registerUser(newUser, "user");
                 result = "success";
                 FacesContext.getCurrentInstance().addMessage(null,
@@ -138,17 +134,5 @@ public class Registration implements Serializable {
      */
     public void setNewUser(Users user) {
         this.newUser = user;
-    }
-
-    public Country[] getCountries() {
-        return Country.values();
-    }
-
-    public Date getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
     }
 }
