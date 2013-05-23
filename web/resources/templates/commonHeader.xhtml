@@ -89,14 +89,20 @@
                     </li>
                   </ul>
                                     
-                <h:form prependId="false"
+                <h:form id="loginForm"
+                        prependId="false"
                         styleClass="navbar-form pull-right"
                         onsubmit="document.getElementById('loginForm').action = 'j_security_check';">
                     
-                    <p:inputText id="j_username" styleClass="span2" />
+                    <p:inputText id="j_username"
+                                 styleClass="span2"
+                                 autocomplete="false" />
                     <p:watermark for="j_username" value="Username" />
-                    <p:password id="j_password" styleClass="span2" />
-                    <p:watermark for="j_password" value="Password" />
+                    <p:password id="j_password"
+                                styleClass="span2"
+                                autocomplete="false"/>
+                    <p:watermark for="j_password"
+                                 value="Password" />
 
                     <div class="btn-group">
                         <p:commandButton id="login-btn"
