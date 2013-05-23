@@ -94,70 +94,14 @@
             </div><!-- /.span4 -->
           </div><!-- /.row -->
         </div><!-- /.container marketing -->
-
-<!--       
-            <c:choose>
-                <c:when test="#{!userIdentity.isUserAuthenticated}">
-                </c:when>
-            </c:choose>
-            <div class="marketing-page-footer">
-                <p:carousel  circular="true" numVisible="1" id="featuredUsersCarousel" 
-                             headerText="Featured Users"
-                             value="#{featured.featuredUsers}" var="user" itemStyleClass="memberCarouselItem" 
-                             widgetVar="carouselNice"> 
-                    <h:link outcome="userProfile.view">
-                        <p:graphicImage id="featuredUserImage" styleClass="rImageSmall"
-                                        url="#{user.image.imagePath}" alt="#{user.image.caption}" /><br/>
-                        <div>#{user.firstName} #{user.lastName}</div>
-                        <f:param name="user" value="#{user.userName}" />
-                    </h:link>
-                </p:carousel>
-                <p:dataList type="none" rows="4" id="newsList" paginatorAlwaysVisible="false"
-                            value="#{news.newsPosts}" var="n"
-                            paginator="TRUE" paginatorPosition="bottom" >
-                    <f:facet name="header"><h:outputText value="Site News" /></f:facet>
-                    <p:panel>
-                        <h:link id="newsLink" value="#{n.newsTitle}" outcome="/news.xhtml">
-                            <f:param name="newsID" value="#{n.newsId}" />
-                        </h:link><br/>
-                        <h:outputText value=" by #{n.poster.userName} on " />
-                        <h:outputText value="#{n.postDate}">
-                            <f:convertDateTime dateStyle="full" timeZone="PST" type="date" />
-                        </h:outputText>
-                    </p:panel>
-                </p:dataList>
-            </div>
-            <p:dataList type="none" rows="2" paginator="TRUE" id="recentRecipes"
-                        paginatorPosition="bottom" value="#{browseRecipes.recentRecipes}" var="r">
-                <f:facet name="header"><h:outputText value="Recent Recipes" /></f:facet>
-                <h:link outcome="recipeProfile.view">
-                    <f:param name="recipe" value="#{r.recipeId}" />
-                    <p:panelGrid columns="2">
-                        <p:column>
-                        <p:graphicImage styleClass="rImageMedium-Small" 
-                                        url="#{r.imageGallery[0].imagePath}" title="#{r.imageGallery[0].description}" 
-                                        alt="#{r.imageGallery[0].caption}"/>
-                        </p:column>
-                        <p:column style="height: 100px;">
-                            <div>#{r.recipeName}</div>
-                            <p style="height:100px; overflow: hidden">
-                                #{r.recipeDescription}
-                            </p>
-                        </p:column>
-                    </p:panelGrid>
-                </h:link>
-            </p:dataList>
-            <h:outputScript library="js" name="carousel_fix.js" />
-        </div>-->
-
-    <script>
-        !function ($) {
-          $(function(){
-            // carousel demo
-            $('#myCarousel').carousel();
-          });
-        }(window.jQuery);
-    </script>
+        
+        <script>
+            !function ($) {
+              $(function(){
+                $('#myCarousel').carousel();
+              });
+            }(window.jQuery);
+        </script>
     </ui:define>
 </ui:composition>
 
