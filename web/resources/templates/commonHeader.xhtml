@@ -190,8 +190,9 @@
                 
                 <button class="btn btn-danger pull-left"
                         id="reset-registration-form-btn"
-                        type="reset"
-                        hidden="true">Reset Form</button>
+                        type="reset">
+                    Reset Form
+                </button>                                  
                 <p:commandButton styleClass="btn btn-primary pull-right"
                                  value="Create Account"
                                  actionListener="#{registration.registerUser}"
@@ -200,13 +201,16 @@
           </div><!-- /.modal-body -->
         </div><!-- ./myModal -->
 
-        <div class="container" id="search-container">
+        <div class="container" id="search-searchcontainer">
             <div class="row">
-                <h:form styleClass="navbar-search pull-right">
-                    <p:inputText id="searchInput" styleClass="search-query" />
-                    <p:watermark for="searchInput" value="Search for recipes, tags, groups..." />
+                <h:form styleClass="navbar-search pull-right"
+                        prependId="false">
+                    <p:inputText id="searchInput"
+                                 styleClass="input-xlarge search-query"  />
+                    <p:watermark for="searchInput"
+                                 value="Search for recipes, tags, users, groups..." />
                     <p:commandButton value="Search"
-                                     styleClass="btn btn-primary"
+                                     styleClass="btn btn-success"
                                      onclick="naviSearch();" />
                 </h:form>
             </div><!-- /.row -->
@@ -225,15 +229,20 @@
             // Initialize dropdown toggle
             $('.dropdown-toggle').dropdown();
             
+            // Once the form has been submitted, the reset button click will be
+            // clicked to reset the registration form and the modal will be
+            // hidden.
             function resetRegistrationForm() {
                 $('#reset-registration-form-btn').click();
                 $('#myModal').modal('hide');
             }
 
-            // Pass forn values into arguments for the seach page
+            // Pass forn values into arguments for the seach page;
+            // window.location.href redirects the browser URL to that of
+            // the search page.
             function naviSearch() {
-                var submittedInputValue = $('#search\\:searchInput').val();
-                window.location.href = "/faces/search.xhtml?searchArg=" + submittedInputValue;
+                var submittedInputValue = $('#searchInput').val();
+                window.location.href = "/RecipeMix/faces/search.xhtml?searchArg=" + submittedInputValue;
             }
         </script>
             
