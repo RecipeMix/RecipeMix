@@ -191,16 +191,26 @@
 
         <div class="container" id="search-searchcontainer">
             <div class="row">
-                <h:form styleClass="navbar-search pull-right"
-                        prependId="false">
-                    <p:inputText id="searchInput"
-                                 styleClass="input-xlarge search-query"  />
-                    <p:watermark for="searchInput"
-                                 value="Search for recipes, tags, users, groups..." />
-                    <p:commandButton value="Search"
-                                     styleClass="btn btn-success"
-                                     onclick="naviSearch();" />
-                </h:form>
+                <div class="span6">
+                    <div class="alert alert-error">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <h4>Error</h4>
+                        This space is reserved for errors and warnings
+                        when registering or logging in.
+                    </div>
+                </div>
+                <div class="span6">
+                    <h:form styleClass="navbar-search pull-right"
+                            prependId="false">
+                        <p:inputText id="searchInput"
+                                     styleClass="input-xlarge search-query"  />
+                        <p:watermark for="searchInput"
+                                     value="Search for recipes, tags, users, groups..." />
+                        <p:commandButton value="Search"
+                                         styleClass="btn btn-success"
+                                         onclick="naviSearch();" />
+                    </h:form>
+                </div>
             </div><!-- /.row -->
         </div><!-- /.container -->
             
