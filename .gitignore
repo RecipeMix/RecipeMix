@@ -5,6 +5,7 @@ nbproject/private/
 nbdist/
 nbactions.xml
 nb-configuration.xml
+build.xml
 
 # Other Files #
 .DS_STORE
