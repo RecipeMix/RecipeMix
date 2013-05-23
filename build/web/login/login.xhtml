@@ -10,10 +10,20 @@
         <ui:composition template="/resources/templates/commonLayout.xhtml">
             <ui:define name="title">Login to RecipeMix</ui:define>
             <ui:define name="content">
-                <h1 class="login">Please log in to access this functionality!</h1>
-                <div class="centerDiv">
+                <div class="container">
+                    <div class="row">
+                        <div class="span12">
+                            <h1 class="login">Please log in to access this functionality!</h1>   
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="span12">
+                            <div class="centerDiv">
                                 <p:graphicImage alt="chicken" title="Cluck!" url="/resources/images/piyo.svg" />
-                </div>
+                            </div>    
+                        </div>
+                    </div>
+                </div><!--/.container -->
             </ui:define>
         </ui:composition>
     </h:body>
