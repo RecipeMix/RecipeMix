@@ -187,11 +187,15 @@
                                  value="Confirm Password" />  
                   </div>
                 </div>
-                  
+                
+                <button class="btn btn-danger pull-left"
+                        id="reset-registration-form-btn"
+                        type="reset"
+                        hidden="true">Reset Form</button>
                 <p:commandButton styleClass="btn btn-primary pull-right"
                                  value="Create Account"
                                  actionListener="#{registration.registerUser}"
-                                 onclick="clearForm();"/>  
+                                 onsuccess="resetRegistrationForm();" />  
               </h:form>
           </div><!-- /.modal-body -->
         </div><!-- ./myModal -->
@@ -221,8 +225,9 @@
             // Initialize dropdown toggle
             $('.dropdown-toggle').dropdown();
             
-            function clearForm() {
-                $(this).closest('registration-form').find("input[type=text], textarea").val("");
+            function resetRegistrationForm() {
+                $('#reset-registration-form-btn').click();
+                $('#myModal').modal('hide');
             }
 
             // Pass forn values into arguments for the seach page
