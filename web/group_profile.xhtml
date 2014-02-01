@@ -1,0 +1,207 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./resources/templates/commonLayout.xhtml"
+                xmlns:c ="http://java.sun.com/jsp/jstl/core"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+
+
+    <ui:define name="title">#{groupProfile.existingGroup.groupName} </ui:define>
+    <ui:define name="content">
+        <p:growl id="growl" showDetail="true" />
+        <c:choose>
+            <!-- Admin, public, or is member -->
+            <c:when test="#{!groupProfile.existingGroup.privacy or
+                            userIdentity.isAdmin or groupProfile.isConfirmedMember}">
+                <div id="groupView">
+                    <div id="groupInfoLeft">
+                        <h1><h:outputText id="Name" value="#{groupProfile.existingGroup.groupName}" /></h1>
+                        <div id="groupOwner">
+                            <h:outputText value="Founded by " />
+                            <h:link value="#{groupProfile.existingGroup.owner.userName}" outcome="userProfile.view">
+                                <f:param name="user" value="#{groupProfile.existingGroup.owner.userName}" />
+                            </h:link>
+                        </div>
+                        <p:tagCloud id="tagCloud" model="#{groupProfile.tags}" />
+
+                        <p:graphicImage id="groupPicture" styleClass="rImageLarge" 
+                                        url="#{groupProfile.existingGroup.image.imagePath}" 
+                                        title="#{groupProfile.existingGroup.groupName}" 
+                                        alt="Group picture" />
+                        <ul class="noBullets">
+                            <li>
+                                <h:form>
+                                    <p:commandButton id="deleteBtn" styleClass="groupPageBtn" value="Delete Group" 
+                                                     rendered="#{groupProfile.isOwner or userIdentity.isAdmin}"
+                                                     ajax="false" action="#{groupsController.doDeleteGroup}">
+                                        <f:param name="groupID" value="#{groupProfile.existingGroup.groupID}" />
+                                    </p:commandButton>
+                                </h:form>
+                            </li>
+                            <li>
+                                <p:commandButton
+                                    id="groupImageUpBtn"
+                                    styleClass="groupPageBtn"
+                                    value="Upload Picture"
+                                    icon="ui-icon-arrowreturnthick-1-n"
+                                    ajax="true"
+                                    rendered="#{groupProfile.canEdit}"
+                                    onclick="upload.show();"/>
+                            </li>
+                            <li>
+                                <p:button styleClass="groupPageBtn" rendered="#{groupProfile.canEdit or userIdentity.isAdmin}"
+                                          id="groupEditBtn" value="Edit Group" outcome="groupProfile.edit">
+                                    <f:param name="groupID" value="#{groupProfile.existingGroup.groupID}"/>
+                                </p:button>
+                            </li>
+                            <li>
+                                <p:button styleClass="groupPageBtn" rendered="#{groupProfile.canEdit}"
+                                          id="groupManageBtn" value="Manage Members" outcome="/account/manage_group_members.xhtml">
+                                    <f:param name="groupID" value="#{groupProfile.existingGroup.groupID}"/>
+                                </p:button>
+                            </li>
+                            <li>
+                                <h:form id="flagForm" prependId="false">
+                                    <p:commandButton styleClass="groupPageBtn"
+                                                     id="recipeFlagBtn"
+                                                     value="Flag This Group"
+                                                     ajax="false" 
+                                                     disabled="#{flagBean.canFlagGroup}"
+                                                     action="#{flagBean.flagObject()}"
+                                                     icon="ui-icon-flag"
+                                                     rendered="#{userIdentity.isUserAuthenticated and !groupProfile.isOwner}" 
+                                                     update=":growl">
+                                        <f:param name="group" value="#{groupProfile.existingGroup.groupID}" />
+                                        <f:param name="object" value="2" />
+                                    </p:commandButton>
+                                </h:form>
+                            </li>
+                            <li>
+                                <h:form id="joinGroupForm">
+                                    <p:commandButton id ="joinGroupButton" styleClass="groupPageBtn"
+                                                     rendered="#{groupProfile.eligibleToJoin}"
+                                                     value="#{groupProfile.joinButtonText}" 
+                                                     actionListener="#{groupProfile.addUserToGroup}" 
+                                                     update=":growl @this">
+                                    </p:commandButton>
+                                </h:form>
+                            </li>
+                        </ul>
+                    </div>  
+                    <p:dialog width="750px" closeOnEscape="true" closable="true" resizable="true" header="Upload Image" widgetVar="upload">
+                        <h:form enctype="multipart/form-data" prependId="false">
+                            <p:fileUpload fileUploadListener="#{groupProfile.createGroupImage}" dragDropSupport="true" showButtons="false" label="Add Image"
+                                          update =":growl" oncomplete= "upload.hide();javascript:location.reload(true);" sizeLimit ="5000000"  allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+                            <h:inputHidden id="groupID" value="#{groupProfile.existingGroup.groupID}" />
+                        </h:form>  
+                    </p:dialog>
+
+                    <div id="groupInfoDiv">
+                        <div id="groupInfoPanel">
+
+                            <p id="groupAbout">
+                                <h:outputText value="#{groupProfile.existingGroup.groupDescription}" 
+                                              title="Description" />
+                            </p>
+                        </div>
+
+                        <p:carousel id="groupMembers" circular="true" headerText="Members" numVisible="4"
+                                    value="#{groupProfile.members}" var="member"
+                                    >
+                            <h:link outcome="userProfile.view" >
+                                <p:graphicImage alt="member picture" styleClass="rImageSmall"
+                                                url="#{member.image.imagePath}" /><br/>
+                                    <h:outputText value="#{member.userName}" />
+
+                                <f:param name="user" value="#{member.userName}" />
+                            </h:link>
+                        </p:carousel>
+
+
+                        <p:carousel rendered="#{groupProfile.recipeRendered}" circular="true" headerText="Recipes" numVisible="4"
+                                    value="#{groupProfile.recipeMembers}" var="recipe">
+                            <p:panel>
+                                <p:graphicImage url="#{recipe.imageGallery[0].imagePath}" styleClass="rImageSmall"
+                                                alt="#{recipe.imageGallery[0].caption}"/><br/>
+                                <h:link value="#{recipe.recipeName}" outcome="recipeProfile.view" >
+                                    <f:param name="recipe" value="#{recipe.recipeId}" />
+                                </h:link>
+                            </p:panel>
+                        </p:carousel>  
+                    </div>
+                    <div id="groupCommentsSection">
+                        <h:form prependId="false" id="commentForm">
+                            <p:dataGrid id="commentsContainer" lazy="true"
+                                        columns="1" rows="5" paginator="TRUE"
+                                        paginatorPosition="bottom" 
+                                        paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink} {RowsPerPageDropdown}"
+                                        rowsPerPageTemplate="5,10,15"
+                                        value="#{groupProfile.commentModel}" var="c"
+                                        emptyMessage="No comments.... yet.">
+                                <f:facet name="header" >Comments</f:facet>
+                                <p:column>
+                                    <p:panelGrid columns="1" >
+                                        <f:facet name="header">
+                                            <div id="commentInfo">
+                                                Posted by <h:link value="#{c.commenter.userName}" outcome="/user_profile.xhtml">
+                                                    <f:param name="user" value="#{c.commenter.userName}" />
+                                                </h:link> on <h:outputText id="commentDate" value="#{c.dateCommented}" >
+                                                    <f:convertDateTime dateStyle="medium" timeZone="PST" type="both" />
+                                                </h:outputText>
+                                            </div>
+                                            <c:if test="#{userIdentity.isAdmin or groupProfile.canEdit}">
+                                                <p:commandButton value="Delete" update="@form" ajax="false"
+                                                                 action="#{groupProfile.deleteComment}" >
+                                                </p:commandButton>
+                                            </c:if>
+                                        </f:facet>
+                                        <h:outputText value="#{c.body}" escape="false" />
+                                    </p:panelGrid>
+                                </p:column>
+                            </p:dataGrid>
+                        </h:form>
+                        <h:form id="commentSubmitForm" prependId="false" rendered="#{userIdentity.isUserAuthenticated}">
+                            <p:editor maxlength="5000" height="200" id="commentBody" required="true" 
+                                      width="400" widgetVar="editor" controls="bold
+                                      italic
+                                      underline
+                                      strikethrough
+                                      subscript
+                                      superscript
+                                      size
+                                      bullets
+                                      numbering
+                                      alignleft
+                                      center
+                                      alignright
+                                      justify
+                                      outdent
+                                      indent"
+                                      requiredMessage="Please don't submit an empty comment! :("
+                                      value="#{groupProfile.newComment.body}"
+                                      rendered="#{userIdentity.isUserAuthenticated}"
+                                      disabled="#{!userIdentity.isUserAuthenticated}" />
+                            <p:watermark for="commentBody" value="Enter your comment..." />
+                            <div id="centerButtons">
+                                <p:commandButton styleClass="smallButton" value="Submit Comment" update=":commentForm:commentsContainer" 
+                                                 actionListener="#{groupProfile.doCreateComment}" icon="ui-icon-disk"
+                                                 oncomplete="editor.clear()" />
+                                <p:commandButton id="clearButton" styleClass="smallButton" type="button" value="Clear" onclick="editor.clear();"  
+                                                 icon="ui-icon-close" /> 
+                            </div>
+                        </h:form>
+                    </div>
+                </div>
+            </c:when>
+            <c:otherwise>
+                This group is private... Sorry bout that.
+            </c:otherwise>
+        </c:choose>
+    </ui:define>
+</ui:composition>
+

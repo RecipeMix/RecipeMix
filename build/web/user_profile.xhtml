@@ -1,0 +1,143 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./resources/templates/commonLayout.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <ui:define name="title">User: #{userProfile.existingUser.firstName} #{userProfile.existingUser.lastName}</ui:define>
+    <ui:define name="content">
+        <p:growl id="growl" showDetail="true" />
+        <div id="userView">
+            <div id="profileGallery">
+                <p:graphicImage id="profilePicture" styleClass="rImageMedium" url="#{userProfile.existingUser.image.imagePath}" alt="#{userProfile.existingUser.image.caption}" title="#{userProfile.existingUser.image.description}" />
+                <ul class="noBullets">
+                    <li>
+                        <p:commandButton
+                            id="profileImageUpBtn"
+                            styleClass="groupPageBtn"
+                            value="Add a Picture"
+                            rendered="#{userProfile.renderButtons}"
+                            icon="ui-icon-plus"
+                            ajax="true"
+                            onclick="upload.show();"/>
+                    </li>
+                    <li>
+                        <p:commandButton
+                            id="profDialogBtn"
+                            styleClass="groupPageBtn"
+                            rendered="#{userProfile.showProfessionalBtn and userProfile.canEdit}"
+                            value="Request Professional Status"
+                            icon="ui-icon-check"
+                            ajax="true"
+                            onclick="professionalDialog.show();"/>
+                    </li>
+                    <li>
+                        <h:form>
+                            <p:commandButton id="deleteBtn" styleClass="groupPageBtn" value="Delete User" 
+                                             ajax="false" action="#{userProfile.doDeleteUser}"
+                                             rendered="#{userIdentity.isAdmin}">
+                                <f:param name="user" value="#{userProfile.existingUser.userName}" />
+                            </p:commandButton>
+                        </h:form>
+                    </li>
+                    <li>
+                        <p:button styleClass="groupPageBtn"
+                                  id="edit" rendered="#{userProfile.canEdit}"
+                                  value="Edit Profile" 
+                                  outcome="profile.edit" />
+                    </li>
+                        
+                    <li>
+                        <h:form id="flagForm" prependId="false" >
+                            <p:commandButton styleClass="groupPageBtn"
+                                             id="recipeFlagBtn"
+                                             value="Report"
+                                             ajax="false" rendered="#{!userProfile.canEdit and userIdentity.isUserAuthenticated}"
+                                             disabled="#{flagBean.canFlagUser}"
+                                             action="#{flagBean.flagObject()}"
+                                             icon="ui-icon-flag"
+                                             update=":growl">
+                                <f:param name="userName" value="#{userProfile.existingUser.userName}" />
+                                <f:param name="object" value="3" />
+                            </p:commandButton>
+                        </h:form>
+                    </li>
+                </ul>
+            </div>
+            
+            <div id="profileInfo">
+                <h1 class="profile"><h:outputText id="userNameTitle" value="#{userProfile.existingUser.userName}" /></h1>
+                <h2 class="profile"><h:outputText id="Name" value="(#{userProfile.existingUser.firstName} #{userProfile.existingUser.lastName})" /></h2>
+                <div id="profileAbout">
+                    <h:outputText value="#{userProfile.existingUser.about}" id="about" title="About" />
+                </div>
+                <p:panelGrid id="profileInfoGrid" columns="2">
+                    <p:outputLabel value="Birthday: " for="dobProfile" />
+                    <h:outputText value="#{userProfile.existingUser.dateOfBirth}" id="dobProfile" title="Date of Birth" >
+                        <f:convertDateTime dateStyle="medium" pattern="mm/dd/yyyy" timeZone="PST" type="date" />
+                    </h:outputText>
+                    <p:outputLabel value="Country: " for="country" />
+                    <h:outputText value="#{userProfile.properCountry}" id="country" title="Country" >
+                    </h:outputText>
+                </p:panelGrid>
+                
+                <p:carousel headerText="Groups" value="#{userProfile.userGroups}" var="g" 
+                            rendered="#{not empty userProfile.userGroups}" circular="true">
+                    <h:link value="#{g.groupName}" outcome="/group_profile.xhtml">
+                        <f:param name="groupID" value="#{g.groupID}" />
+                        <p:graphicImage styleClass="rImageSmall" url="#{g.image.imagePath}" alt="group img" title="#{g.groupName}" />
+                    </h:link>
+                </p:carousel>
+                
+                <p:carousel headerText="Recipes" value="#{userProfile.existingUser.recipes}" 
+                            var="r"  circular="true" rendered="#{not empty userProfile.existingUser.recipes}">
+                    <h:link value="#{r.recipeName}" outcome="/recipe.xhtml">
+                        <f:param name="recipe" value="#{r.recipeId}" />
+                        <p:graphicImage styleClass="rImageSmall" url="#{r.imageGallery[0].imagePath}" alt="group img" 
+                                        title="#{r.recipeName}" />
+                    </h:link>
+                </p:carousel>
+                
+            </div>
+            <p:dialog width="600px" height="400px" closeOnEscape="true" closable="true" 
+                      resizable="true" header="Request Professional Status" widgetVar="professionalDialog">
+                <h:form prependId="false" id="profRequestForm">
+                    <p:panel>
+                        If you would like to be confirmed as a professional, let us know the best way
+                        that we can confirm who you are. It could be a tweet from your official twitter account,
+                        a phone call, an email, you name it!
+                    </p:panel>
+                    <p:panelGrid columns="2">
+                        <p:outputLabel for="employer" value="Employer (if applicable): "/>
+                        <p:inputText id="employer" alt="Employer name" value="#{professionalStatus.employer}" title="Employer" />
+
+                        <p:outputLabel for="years" value="Years of Experience: "/>
+                        <p:spinner alt="Years of Exp. Input" id="years"
+                                   stepFactor="1" min="0" size="2" max="100" suffix=" yrs" value="#{professionalStatus.yearsOfExperience}"
+                                   required="true" requiredMessage="Years of experience field is required!"/>
+
+                        <p:watermark for="request" value="How may we best confirm your identity?" />
+                        <p:inputTextarea id="request" value="#{professionalStatus.request}" cols="50"
+                                         title="Information" maxlength="1000" required="true" requiredMessage="Please tell us how to confirm who you are." />
+
+
+                    </p:panelGrid>
+                    <p:commandButton value="Submit Request" update=":growl" onsuccess="professionalDialog.hide();"
+                                     action="#{professionalStatus.applyForProfessionalStatus}" />
+                </h:form>       
+            </p:dialog> 
+            <p:dialog width="750px" closeOnEscape="true" 
+                      resizable="true" header="Upload Image" closable="true" widgetVar="upload">
+                        <h:form enctype="multipart/form-data">
+                            <p:fileUpload fileUploadListener="#{createUserImage.doCreateUserImage}" dragDropSupport="true" showButtons="false" label="Add Image"
+                                          sizeLimit ="5000000" oncomplete="upload.hide();javascript:location.reload(true);" 
+                                          allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+                        </h:form> 
+        </p:dialog>
+        </div>
+    </ui:define>
+</ui:composition>

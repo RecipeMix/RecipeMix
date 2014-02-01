@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+    <context-param>
+        <param-name>javax.faces.PROJECT_STAGE</param-name>
+        <param-value>Production</param-value>
+    </context-param>
+    <context-param>
+        <!-- To enable a popup window to appear when using <ui:debug /> -->
+        <param-name>javax.faces.FACELETS_DEVELOPMENT</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    <context-param>
+        <!-- This way Facelets will skip the comments while parsing the view xhtml template -->
+        <param-name>javax.faces.FACELETS_SKIP_COMMENTS</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    <!-- FILTER -->
+    <filter>
+        <description>Requests to secured resources proceed only for authenticated users</description>
+        <filter-name>Authenticate Request</filter-name>
+        <filter-class>recipemix.controllers.SecurityFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>Authenticate Request</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>INCLUDE</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>ERROR</dispatcher>
+    </filter-mapping>
+    <filter>
+        <filter-name>PrimeFaces FileUpload Filter</filter-name>
+        <filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>
+        <init-param>
+            <param-name>thresholdSize</param-name>
+            <param-value>51200</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>PrimeFaces FileUpload Filter</filter-name>
+        <servlet-name>Faces Servlet</servlet-name>
+    </filter-mapping>
+    <!--
+    -->
+    <!--Servlet configuration-->
+    <servlet>
+        <servlet-name>Faces Servlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>/faces/*</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <welcome-file-list>
+        <welcome-file>faces/index.xhtml</welcome-file>
+    </welcome-file-list>
+    <!--
+    -->
+    <!-- Error pages-->
+    <error-page>
+        <error-code>400</error-code>
+        <location>/faces/errors/HTTP400.xhtml</location>
+    </error-page>
+    <error-page>
+        <error-code>403</error-code>
+        <location>/faces/errors/HTTP403.xhtml</location>
+    </error-page>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/faces/errors/HTTP404.xhtml</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/faces/errors/HTTP500.xhtml</location>
+    </error-page>
+    <security-constraint>
+        <display-name>User functionality</display-name>
+        <web-resource-collection>
+            <web-resource-name>User Account Functions</web-resource-name>
+            <description/>
+            <url-pattern>/faces/account/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description>Must have the role of a user or moderator</description>
+            <role-name>user</role-name>
+            <role-name>siteModerator</role-name>
+            <role-name>professional</role-name>
+            <role-name>admin</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>Admin functionality</display-name>
+        <web-resource-collection>
+            <web-resource-name>Admin Functions</web-resource-name>
+            <description/>
+            <url-pattern>/faces/admin/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description>Must have the role of site admin</description>
+            <role-name>admin</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>Site Moderator functionality</display-name>
+        <web-resource-collection>
+            <web-resource-name>Site Moderator Functions</web-resource-name>
+            <description/>
+            <url-pattern>/faces/sitemod/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description>Must have the role of site moderatior</description>
+            <role-name>siteModerator</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>Professional functionality</display-name>
+        <web-resource-collection>
+            <web-resource-name>Professional functions</web-resource-name>
+            <description>Requires professional role</description>
+            <url-pattern>/faces/professional/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description>Must have the role of professional</description>
+            <role-name>professional</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>SecuredAppRealm</realm-name>
+        <form-login-config>
+            <form-login-page>/faces/login/login.xhtml</form-login-page>
+            <form-error-page>/faces/login/loginError.xhtml</form-error-page>
+        </form-login-config>
+    </login-config>
+    <security-role>
+        <description>A regular user</description>
+        <role-name>user</role-name>
+    </security-role>
+    <security-role>
+        <description>Can edit default front page content and news</description>
+        <role-name>siteModerator</role-name>
+    </security-role>
+    <security-role>
+        <description>The site administrator</description>
+        <role-name>admin</role-name>
+    </security-role>
+    <!-- web fonts -->
+    <mime-mapping>
+        <extension>eot</extension>
+        <mime-type>application/vnd.ms-fontobject</mime-type>
+    </mime-mapping>
+    <mime-mapping>
+        <extension>otf</extension>
+        <mime-type>font/opentype</mime-type>
+    </mime-mapping>
+    <mime-mapping>
+        <extension>ttf</extension>
+        <mime-type>application/x-font-ttf</mime-type>
+    </mime-mapping>
+    <mime-mapping>
+        <extension>woff</extension>
+        <mime-type>application/x-font-woff</mime-type>
+    </mime-mapping>
+    <mime-mapping>
+        <extension>svg</extension>
+        <mime-type>image/svg+xml</mime-type>
+    </mime-mapping>
+    <!-- PrimeFaces theming-->
+    <context-param>
+        <param-name>primefaces.THEME</param-name>
+        <param-value>recipemix</param-value>
+    </context-param>
+    <security-role>
+        <description>Can submit reviews to recipes</description>
+        <role-name>professional</role-name>
+    </security-role>
+</web-app>

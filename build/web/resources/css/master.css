@@ -1,0 +1,1529 @@
+
+/* CUSTOMIZE THE JQUERY THEMEROLLER
+-------------------------------------------------- */
+.ui-inputfield {
+	background: #FFF !important;
+	color: #000 !important;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+/* CUSTOMIZE THE NAVBAR
+-------------------------------------------------- */
+.navbar-inner {
+    background: #2980b9 !important; 
+    border: none !important;
+    color: #FFFFFF !important;
+}
+
+.navbar .brand {
+    color: #fff !important;
+}
+
+.navbar .caret{
+    border-top-color: #fff !important;
+    border-bottom-color: #fff !important;
+}
+
+.navbar-form input {
+    margin-right: 0.625em;
+}
+
+.navbar .nav > li > a {
+    color: #fff !important;
+}
+
+.nav .active > a {
+    background-color: #3498db !important;
+}
+
+.nav li.dropdown.open > .dropdown-toggle {
+   background-color: #9b59b6 !important;  
+}
+
+.navbar .btn-primary {
+    background: #8e44ad !important;
+    margin-right: 0.625em;
+}
+
+.navbar .btn-info {
+    background: #16a085 !important;
+}
+
+.circular {
+    width: 140px;
+    height: 140px;
+    -webkit-border-radius: 150px;
+    -moz-border-radius: 150px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+    -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+    -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+}
+
+/* CUSTOMIZE THE CAROUSEL
+-------------------------------------------------- */
+
+ /*Carousel base class*/
+ .carousel {
+    padding-top: 1.25em;
+ }
+
+.carousel .container {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.carousel .item {
+    height: 31.25em;
+}
+
+.carousel img {
+    min-width: 100%;
+    height: 31.25em;
+}
+
+.carousel-caption {
+    background-color: #27ae60 !important;
+    max-width: 34.375em;
+}
+
+.carousel-caption h1,
+.carousel-caption .lead {
+    margin: 0;
+    line-height: 1.25;
+    color: #fff;
+    text-shadow: 0 1px 1px rgba(0,0,0,.4);
+}
+
+.carousel-caption .btn {
+    margin-top: 0.625em; 
+}
+
+/* MARKETING CONTENT
+-------------------------------------------------- */
+
+/* Center align the text within the three columns below the carousel */
+.marketing .span4 {
+    text-align: center;
+}
+
+.marketing h2 {
+    font-weight: normal;
+}
+
+.marketing .span4 p {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+
+/*html, body {
+    margin: -10px 0 0 0 ;
+    min-height: 100%;
+    min-width: 700px; text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
+    -webkit-font-smoothing: subpixel-antialiased;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    font-family:'Droid Serif', serif;
+}
+
+body {
+    background-color: #ecf0f1;
+    color: #000000;
+    font-family:'Droid Sans', sans-serif;
+    font-size: 16px;
+}
+
+a {
+    font-family: 'Droid Sans', Georgia, serif;
+}
+
+ ThemeRoller CSS Override BEGIN 
+
+.ui-widget {
+    font-family:'Droid Sans', sans-serif;
+}
+
+.ui-inputfield {
+	background: #FFF !important;
+	color: #000 !important;
+}
+
+.ui-outputlabel.ui-state-error {
+    color: #FFF !important;
+}
+
+.ui-editable-column.ui-state-highlight.ui-cell-editing {
+    background: none;
+}
+
+.ui-wizard.ui-widget {
+    padding: 1.25em 0 1.25em 1.25em;
+}
+
+ ThemeRoller CSS Override END 
+
+#logout{
+    display:inline;
+}
+
+#overlayLogin{
+    float:left;
+}
+
+#overLayRegister{
+    float:right;
+}
+
+#registerOverlay{ 
+    height: 300px;
+    width: 550px; 
+}
+
+h1.login{
+    text-align:center;
+}
+
+#content{
+    background-color: #fff;
+    margin-left:auto;
+    margin-right:auto;
+    max-width: 60%;
+    min-height:600px;    
+    min-width: 700px;
+}
+
+div.adminPanelDataTable *.ui-datatable.ui-widget {
+    margin-bottom: 2em;
+    margin-top: 2em;
+}
+
+#left{
+    float:left;
+    width:30%;
+}
+
+#center{
+    float:right;
+    width: 40%;
+}
+
+#right{
+    float:right;
+    width: 30%;
+}
+
+.contentColumn{
+    width: 618px;
+    height:40%;
+    overflow:hidden;
+    position: relative;
+    text-overflow: ellipsis;
+}
+
+#header {
+    background-color: #0081c2;
+    color:#FFFFFF;
+    font-size: 20px;
+    font-weight: lighter;
+    height:60px;
+    margin-left:auto;
+    margin-right:auto;
+    max-width:65%;
+    min-width: 680px;
+    padding: 60px 10px 15px 10px;
+    position: relative;
+}
+
+#header h1{
+    bottom: 0.5em;
+    color: #fff;
+    float: left;
+    font-family: 'Lato', sans-serif;
+    font-size: 2.8em;
+    margin-left: 0.5em;
+    margin-right: 2.5em;
+    position: absolute;
+}
+
+#header {
+    font-family:'Droid Serif', sans-serif;
+    font-weight: normal;
+}
+
+#search{
+    position: absolute;
+    right:15px;
+    top:35px;
+}
+
+.searchInput{
+    font-size: 14px;
+    height:1.5em;
+    width: 20em;
+}
+
+.searchBtn {
+    font-size:14px;
+    margin-left: 0.2em;
+}
+
+#footer{
+    clear: both;
+    font-size: 14px;
+    height:50px;
+    height: 3em;
+    margin-bottom: 1em;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top: 1em;
+    max-width: 60%;
+    text-align: center;
+    z-index: 10;
+}
+
+#footer div{
+    font-size: 12px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+#nav {
+    bottom: 10px;
+    position: absolute;
+    right:0;
+}
+
+#nav ul {
+    list-style-type: none;
+}
+
+#nav a {
+    color: #FFFFFF;
+    display: inline;
+    font-size: 20px;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding: 10px 0px 10px 0px;
+    text-align: center;
+    text-decoration: none;
+}
+
+#nav #menu{
+    display: inline;
+}
+
+#nav #menu .trigger {
+    cursor: pointer;
+    display: inline;
+    list-style-type: none;
+    padding: 12px 12px 12px 12px;
+    position:relative;
+    text-align: center;
+    text-align: center;
+    text-decoration: none;
+}
+
+#nav #menu .trigger:hover{
+    background:#12aeef;
+}
+
+#nav #menu .trigger a {
+    color: #FFFFFF;
+    font-family: 'Droid Sans', sans-serif;
+    font-size: 20px;
+    font-weight: lighter;
+    margin:0;
+    text-align: center;
+}
+
+#nav #menu .trigger .submenu a {
+    color: #FFFFFF;
+    font-family: 'Droid Sans', sans-serif;
+    font-size: 20px;
+    margin:0;
+    padding-bottom: 0.5em;
+    padding-left: 0.75em;
+    padding-right: 0.5em;
+    padding-top: 0.5em;
+}
+
+#nav #menu .trigger .submenu {
+    display: none;
+    margin-top:8px;
+    z-index: 10;
+}
+
+#nav #menu .trigger:hover ul li:first-child a{
+    background-color: #8e44ad;
+    border: 1px solid #0081c2;
+    color: #FFFFFF;
+    font-weight:bold;
+}
+
+#nav #menu .trigger:hover ul li:first-child a:hover{
+    background-color: #9b59b6;
+}
+
+#nav #menu .trigger:hover ul {
+    display: block;
+    position: absolute;
+    right:0;
+}
+
+#nav #menu .trigger:hover ul li a {
+    background:#12aeef;
+    border-bottom: 1px solid white;
+    border-right: none;
+    color:#ffffff;
+    display:block;
+    font-size: 16px;
+    text-align: right;
+    width: 150px;
+}
+
+#nav #menu .trigger:hover ul li a:hover {
+    background:#6dc7ec;
+    color:#fff;
+}
+
+ul.formFields {
+    list-style: none;
+    width: 100%;
+}
+
+ul.formFields li>label {
+    color: #333333;
+    display: block;
+    float: left;
+    font-size: 16px;
+    margin-right: 1em;
+    text-align: left;
+    text-shadow: none;
+    width: 25%;
+}
+
+ul.formFields li {
+    padding-bottom: 0.2em;
+    padding-top: 0.2em;
+}
+
+h1 {
+    font-family: 'Droid Sans', sans-serif;
+    font-size:  36px;
+    font-weight: bold;
+    margin: 0px;
+    padding: 0px;
+}
+
+a:link, a:visited {
+    color: #e74200;
+    font-weight : bold;
+    text-decoration: none;
+}
+
+a:link:hover, a:visited:hover  {
+    color: #e74200;
+    font-weight : bold;
+    text-decoration : underline;
+}
+
+.confirmRecipe h1{
+    font-size: 24px;
+}
+
+.confirmRecipe td{
+    vertical-align: top;
+}
+
+.small{
+    font-size:12px;
+}
+
+.createRecipe{
+    float:right;
+    font-size:18px;
+}
+
+ create an arrow that points down 
+.arrow-down { 
+    border-left:5px solid transparent;
+    border-right:5px solid transparent;
+    border-top:5px solid #ffffff;
+    display:inline;
+    font-size:0px; 
+    height:0px;
+    line-height:0px;
+    width:0px;
+}
+
+h1.profile{
+    font-size:2.5em;
+    margin-bottom:0;
+    margin-top:5px;
+    text-align:center;
+}
+
+h2.profile{
+    font-size:1em;
+    margin-top:0;
+    text-align:center;
+}
+
+#recipeView{
+    margin: 25px;
+    position: relative;
+    padding: 10px;
+}
+
+#recipeView h1{
+    font-size:2.4em;
+    margin-bottom:5px;
+    margin-top:5px;
+}
+#recipeView h2{
+    font-size:1.5em;
+    margin-bottom:2px;
+    margin-top:10px;
+}
+
+
+#recipeView div#creatorLink{
+    display: block;
+    font-size: 14px;
+    margin: 5px;
+}
+
+#recipeContainer{
+    margin-left:auto;
+    margin-right:auto;
+    width: 80%;
+}
+
+#tagCloud{
+    border:none;
+    font-family: 'Droid Sans', sans-serif;
+    font-size: 14px;
+    text-align: left;
+}
+
+#tagCloud a:link{
+    color: #c7c7c7;
+    font-size: 14px;
+}
+#tagCloud a:hover{
+    background-color: #FFFFFF;
+    color: #a8a8a8;
+    font-weight:bolder;
+    text-decoration: none;
+}
+
+#tagCloud a:visited{
+    color: #c7c7c7;
+}
+
+#tagCloud a:active{
+    color: #a8a8a8;
+}
+
+#recipeView #gallery{
+    float:right;
+    margin-bottom: 10px;
+    width: 300px;
+}
+
+
+#recipeView #gallery #flagForm{
+    display:inline;
+}
+
+#recipeView #gallery .ui-button{
+    float:left;
+    display: inline;
+    font-size:10px;
+    width:120px;
+}
+
+#recipeView #recipeRate{
+    margin-bottom: 5px;
+    margin-top: 5px;
+    width:140px;
+}
+
+#recipeView #recipeRate div{
+    display:block;
+    margin-right: 2px;
+}
+
+#recipeView #recipeLowdown {
+    border: none;
+    color: #777777;
+    font-size:14px;
+    font-style: italic;
+
+}
+
+#recipeView #recipeLowdown p{
+    margin:5px;
+    min-height: 100px;
+    min-width: 350px;
+}
+
+#recipeView .recipeIngredients {
+    width: 300px;
+}
+
+.recipeSteps{
+    max-width:90%;
+    padding: -10px;
+}
+.recipeSteps .ui-widget-content{
+    border:none;
+    padding: 5px;
+    vertical-align: text-bottom;
+}
+
+.recipeSteps div.stepNum{
+    color: rgb(231, 66, 0);
+    display:inline;
+    font-family:'Droid Serif', serif;
+    font-size: 1.4em;
+}
+
+#recipeCommentsSection{
+    margin-left:auto;
+    margin-right:auto;
+    max-width: 800px;
+}
+
+#groupCommentsSection{
+    margin-left:auto;
+    margin-right:auto;
+    max-width: 800px;
+}
+
+.recipeSteps .ui-widget-content td{
+    vertical-align: top;
+}
+
+#recipeView #relatedRecipes{
+    margin:10px;
+}
+
+.relatedPanel{
+    width: 200px;
+}
+
+#recipeView #centerButtons{
+    margin-left: auto;
+    margin-right: auto;
+    width: 300px;
+}
+
+#recipeView #recipeTimes{
+    margin-top: 15px;
+    width: 350px;
+}
+
+#commentsContainer .ui-datagrid-column .ui-widget{
+    width:100%;
+}
+
+#commentsContainer .ui-datagrid-column .ui-widget-header{
+    font-size: 14px;
+    text-align:left;
+}
+
+#commentsContainer .ui-datagrid-column .ui-button{
+    display:inline;
+    float:right;
+    font-size: 12px;
+    width: 70px;
+}
+
+#commentsContainer .ui-datagrid-column #commentInfo{
+    display:inline;
+    float:left;
+    font-size: 12px;
+}
+
+ #commentsContainer .ui-editor{
+    margin-left:auto !important;
+    margin-right:auto !important;
+    width: 400px;
+}
+
+#commentSubmitForm{
+    width:500px;
+    margin-left:auto !important;
+    margin-right:auto !important;
+}
+
+#recipeView #reviews {
+    margin: 10px;
+}
+
+.reviewBlurb{
+    border: none;
+    font-size: 14px;
+    font-style: italic;
+    height: 150px;
+    width:200px;
+}
+
+.reviewBlurb a{
+    font-style: normal;
+}
+
+#profileImageUpBtn{
+    font-size:10px;
+    width:120px;
+}
+
+#gallery .ui-galleria{
+    max-height: 200px !important;
+    max-width: 300px !important;
+}
+
+.ui-galleria-filmstrip-wrapper {
+    display:none;
+}
+
+#profDialogBtn{
+    font-size:10px;
+    width:200px;
+}
+
+#registration .ui-inputfield {
+    width:200px;
+}
+
+#registration #countries{
+    width:100px;
+}
+
+#registration .ui-button  {
+    background-color: black;
+    color: #FFFFFF;
+    float: right;
+    margin-right: 1.5em;
+    margin-top: 1.0em;
+    text-decoration: none;
+}
+
+#registration .ui-button-text {
+    background-color: #8e44ad;
+    color: #FFFFFF;
+}
+
+
+#userView{
+    padding: 20px;
+}
+
+#userView .groupPageBtn{
+    font-size: 12px;
+    width: 120px;
+    display: inline !important;
+}
+
+#userView #profileGallery{
+    float:left;
+    width: 300px;
+}
+
+#userView #profileGallery #profilePicture{
+    margin-bottom: auto;margin-top: 5%;
+    margin-left: auto;margin-right: auto;
+    max-height: 300px;max-width: 300px;
+}
+
+#userView ul li{
+    width: 120px;
+}
+
+
+#userView #profileInfo{
+    margin: 0 0 0 320px;
+}
+
+#userView #profileInfo .ui-carousel{
+    width: 300px;
+    margin-left: auto;margin-right: auto;
+    display: block;
+    margin-top: 20px;
+}
+
+#userView #profileInfo .ui-carousel-viewport{
+    height: 130px !important;
+}
+
+#profileInfoGrid{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#registerOverlay .ui-selectonemenu{
+    width: 200px !important; 
+}
+
+.ui-dataList-data {
+    border:none;
+}
+
+.vertAlignCells{
+    border:none;
+    max-height: 300px;
+    text-overflow: ellipsis;
+}
+
+.vertAlignCells>tbody>tr>td{
+    border:none;
+    margin:20px;
+    max-height: 300px;
+    padding: 10px;
+    text-overflow: ellipsis;
+    vertical-align: top;
+}
+
+.rDescrip{
+    width: available;
+    color: #777777;
+    font-size:12px;
+}
+
+.welcomeImage{
+    max-width: 600px;
+}
+
+.recipeGalleryImage{
+    max-width: 300px;
+}
+
+.rImageSmall{
+    margin-left: auto;margin-right: auto;
+    max-height: 100px;max-width: 100px;
+}
+
+.rImageMedium-Small{
+    margin-left: auto;margin-right: auto;
+    max-height: 150px;max-width: 150px;
+}
+
+.rImageMedium{
+    margin-left: auto;margin-right: auto;
+    max-height: 200px;max-width: 200px;
+}
+
+.rImageLarge{
+    margin-left: auto;margin-right: auto;
+    max-height: 300px;max-width: 300px;
+}
+.notif{
+    filter:alpha(opacity=80);
+    opacity:0.8;
+    padding:50px 0 0 50px;
+    text-align: center;
+}
+
+ Gridster styles 
+
+.gridster {
+    color: #666666;
+    font-family: 'Droid Sans', sans-serif;
+    font-size: small;
+    margin: 0 auto;
+    opacity: .8;
+    -moz-transition: opacity .6s;
+    -ms-transition: opacity .6s;
+    -o-transition: opacity .6s;
+    -webkit-transition: opacity .6s;
+    transition: opacity .6s;
+    width: 765px;
+    -webkit-font-smoothing: antialiased;
+
+}
+
+.gridster a, .gridster a:link, .gridster a:visited {
+    color: #fff;
+    text-shadow: 2px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+}
+.gridster ul, .gridster ol {
+    list-style: none;
+}
+
+.gridster .gs_w {
+    background: #FFF;
+    -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.3);
+    box-shadow: 0 0 5px rgba(0,0,0,0.3);
+    cursor: pointer;
+}
+
+.gridster .player {
+    -webkit-box-shadow: 3px 3px 5px rgba(0,0,0,0.3);
+    box-shadow: 3px 3px 5px rgba(0,0,0,0.3);
+}
+
+.confirmRecipe{
+    text-overflow: ellipsis;
+}
+
+.confirmRecipe>tbody>tr>td{
+    margin:20px;
+    max-height: 300px;
+    padding: 10px;
+    text-overflow: ellipsis;
+}
+
+.createRecipeButton {
+    float: right;
+}
+
+.selectOneMenu {
+    width: available;
+}
+
+.recipePageBody{
+
+}
+
+#joinButton{
+    float:right;
+}
+
+#ingredPanel{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#reviewIngredients{
+    padding:3px;
+}
+
+#recipeReview h1{
+    color: black;
+    font-size: 16px;
+}
+
+#registration #dob {
+    white-space: nowrap;
+}
+
+#recentRecipes{
+    width: 618px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+}
+
+#recentRecipes div.right{
+    display:inline;
+}
+
+#recentRecipes .ui-panel{
+    height: 180px !important;
+}
+
+.pictureColumn{
+    max-width: 230px !important;
+}
+
+#recentRecipes .recentDescrip{
+    width: 300px;
+    margin: 2px 2px 2px 250px;
+}
+
+#recentRecipes .pictureColumn .ui-panel{
+    float: left;
+    max-width: 230px !important;
+}
+
+#recentRecipes .pictureColumn .ui-panel-content{
+    float: left;
+    max-width: 220px !important;
+}
+
+#recentRecipes .moreButton{
+    font-size:10px;
+    float:right;
+}
+
+#groupView{
+    padding: 20px 0 0 25px;
+}
+
+#groupView h1{
+    font-size:48px;
+    text-align:center;
+}
+
+#groupView .groupPageBtn{
+    font-size: 12px;
+    display:inline;
+    width: 150px;
+}
+
+#groupView #groupPicture{
+    margin:5px;
+    margin-left: auto;
+    margin-right: auto;
+    max-height: 500px;
+    max-width: 300px;
+    text-align: center;
+}
+
+#groupView #groupCreator{
+    display:block;
+    font-size: 24px;
+    margin-left:auto;
+    margin-right:auto;
+    text-align: center;
+}
+
+#groupView .ui-panel#groupInfoPanel{
+    border:none;
+    float:right;
+    height: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    width: 600px;
+}
+
+
+.membersCarouselItem {
+    text-decoration: none;
+}
+
+.membersCarouselItem a:hover{
+    text-decoration: none;
+}
+
+#groupView #groupInfoPanel #groupAbout{
+    font-size: 16px;
+    font-style: italic;
+    min-height: 100px;
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#groupView #groupOwner{
+    text-align: center;
+}
+
+#groupView #groupInfoPanel #groupAbout a{ 
+    display:inline;
+}
+
+#groupView #groupInfoLeft{
+    float:left;
+    width: 350px;
+}
+
+#groupView .ui-panel{
+    width:100%;
+}
+div#groupInfoDiv{
+    margin: 0 0 0 350px;
+}
+
+#groupView #commentForm #postCommentMessage{
+    background-color: #0081c2;
+    color: white;
+    float: bottom;
+    font-weight: bold;
+    padding: 5px;
+    text-align:center;
+}
+
+#groupView #commentForm #commentTextInput{
+    margin-left: auto;
+    margin-right: auto;
+    width: 500px;
+}
+
+#groupView .ui-carousel{
+    height: 200px;
+    margin-left:auto;
+    margin-right:auto;
+    display: block;
+    width: 450px !important;
+}
+
+#groupView body{
+    
+}
+
+#groupView .ui-carousel-viewport{
+    height: 160px !important;
+} 
+
+#myRecipesView{
+    padding: 15px;
+}
+
+#myRecipesView h1{
+    display:block;
+    font-size:40px;
+}
+
+#myRecipesView #createRecipeBtn{
+    display:block;
+    float:right;
+    font-size: 14px;
+}
+
+#myRecipesView #recipesList{
+    display:block;
+    margin: 10px;
+}
+
+#myRecipesView #recipesList #controls{
+    float:right;
+}
+
+#myRecipesView #recipesList #recipeDescrip{
+    color: #777777;
+    font-size:12px;
+    overflow: hidden;
+}
+
+#newsList a{
+    font-size: 16px;
+}
+
+#newsList{
+    overflow:hidden;
+    text-overflow: ellipsis;
+    width: 458px;
+    float:right;
+    font-size: 14px;
+}
+
+#newsList .ui-panel-content{
+    padding: 2px;
+}
+
+.marketing-page-footer{
+    width: 618px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#featuredUsersCarousel{
+    margin-left:auto;
+    margin-right:auto;
+    width: 200px;
+    border:none;
+}
+
+#frontPageWrapper #featuredRecipesCarousel{
+    margin-left:auto;
+    margin-right:auto;
+    width: 700px;
+}
+#featuredRecipesCarousel .ui-panelgrid td{
+    border:none;
+    border-style: hidden !important;
+    overflow: hidden;
+    text-wrap: normal;
+    text-overflow: ellipsis;
+    vertical-align: top;
+}
+
+.featuredRecipeInfo{
+    color: #a8a8a8;
+    font-size: 12px;
+    font-style: italic;
+    height: 200px;
+    width:480px;
+}
+
+.featuredRecipeInfo a{
+    font-size: 28px;
+    font-style: normal;
+}
+
+.memberCarouselItem{
+    height:150px;
+    overflow:hidden;
+    text-align: center;
+    text-overflow: ellipsis;
+    width: 150px;
+}
+
+.recipeCarouselItem{
+    max-height:500px;
+    max-width: 700px;
+    min-height:300px; 
+    min-width:700px;
+}
+
+#featuredRecipesCarousel #featuredRecipeImage{
+    display:inline;
+    float:left;
+    max-height: 300px;
+    max-width: 500px;
+}
+
+#frontPageWrapper.ui-carousel.ui-widget-content>img{
+    margin-left:auto;
+    margin-right:auto;
+    text-align:center;
+    width:150px;
+}
+
+#featuredUsersCarousel a{
+    display:block;
+    margin-left:auto;
+    margin-right:auto;
+    text-align: center;
+}
+
+#featuredUserImage{
+    max-height: 150px;
+    max-width: 150px;
+}
+
+#frontPageWrapper #left #featuredRecipesCarousel a{
+    display:block;
+
+}
+
+#newsView{
+    padding: 20px;
+}
+
+#newsView h1{
+    font-size:36px;
+    margin:10px;
+}
+
+#newsView #newsPostInfo{
+    font-size: 14px;
+}
+
+#siteModView h1 {
+    font-size: 36px;
+}
+#siteModView h2 {
+    font-size: 22px;
+}
+
+.dataTableEditMessage {
+    font-size: 20px;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+
+#loginOverlay{
+    font-size: 12px;
+    z-index: 10;
+}
+
+#loginOverlay .ui-panelgrid{
+    border:none;
+    border-style: hidden !important;
+    margin-bottom: 5px;
+}
+#registerOverlay{
+    z-index: 15;
+}
+
+#recipeRateStars{
+    display:inline;
+}
+
+.marketing-page {
+    position:relative;
+    background-color: #2c3e50;
+    font-family: "Merriweather Sans", sans-serif;
+    max-width: 100%;
+    max-height: 100%;
+    min-height: 700px;    
+    min-width: 480px;
+    padding: 20px;
+}
+
+.marketing-page-column {
+    background-color: #2980b9;
+    color: #F0FFFF;
+    margin-left: 5px;
+    width: 200px;
+    margin-bottom: 20px;
+}
+
+.marketing-page h1 {
+    color: #F0FFFF;
+    font-size: 32px;
+    margin: 20px 0 20px 20px;
+    text-align: center;
+}
+
+.marketing-page-column #column-title {
+    background-color: #d35400;
+    margin: 5px 5px 5px 5px;
+}
+
+.marketing-page-column h2 {
+    margin: 5px 5px 5px 5px;
+}
+
+.marketing-page-column p {
+    margin: 5px 5px 5px 5px;
+}
+
+#marketing-page-columns {
+    margin-left:auto;
+    margin-right:auto;
+    width:620px;
+}
+
+#col1 {
+    float: left;
+    width: 200px;
+}
+
+#col2 {
+    float: left;
+    width: 200px;
+}
+
+#col3 {
+    float: left;
+    width: 200px;
+}
+
+#marketing-page-gallery  {
+    margin-left:auto;
+    margin-right:auto;
+    padding-top: 20px;
+    width: 600px;
+}
+
+#helpButton {
+    padding-right: 1.25em;
+    padding-bottom: 40px;
+    padding-top: -40px;
+    float: right;
+    position: relative;
+}
+
+.chardinjs-tooltiptext {
+    
+}
+
+.smallButton{
+    font-size: 12px;
+}
+
+#siteModView #recipeTable .smallButton{
+    font-size: 8px;
+}
+
+.mediumTable{
+    margin-left:auto;
+    margin-right:auto;
+    max-width: 80%;
+    min-width: 50%;
+}
+
+.smallTable{
+    margin-left:auto;
+    margin-right:auto;
+    max-width: 50%;
+    min-width: 30%;
+}
+
+.tableRemove{
+    width: 50px;
+}
+
+.tableMediumCell{
+    width: 100px;
+}
+
+.tableMediumCell .ui-selectonemenu{
+    width: 100px;
+}
+
+.tableSmallCell{
+    width: 30px;
+}
+
+.centerDiv {
+    margin-bottom: 20px;margin-left:auto;margin-right: auto;
+    margin-top: 20px;
+    width:300px;
+}
+
+.noBullets{
+    list-style-type: none;
+}
+
+.noBullets form{
+    display:inline;
+}
+
+.recipeBtn{
+    display:inline;
+    width: 200px;
+}
+
+.searchImg{
+    max-height: 250px;
+    max-width: 250px;
+}
+
+.searchResult{
+    max-width: 250px;
+}
+.searchGrid .ui-panel-content{
+    max-width: 300px;
+    padding:5px;
+}
+
+
+.searchResult a{
+    text-align: center;
+}
+
+#recipeView .ui-editor{
+    margin-left:auto;
+    margin-right:auto;
+    width: 500px;
+}
+
+#recipeView .ui-button{
+    font-size: 12px;
+}
+
+.ui-galleria-frame, .ui-galleria-frame, .ui-galleria-frame-content, .ui-galleria-frame-image {
+    max-height: 40px;
+    max-width: 40px;
+}
+
+#stepsTable .ui-editable-column{
+    height: 50px;
+    max-width: 300px;
+    white-space:normal !important;
+}
+
+.nextButton{
+    float:right;
+}
+
+.prevButton{
+    float:left;
+}
+
+h1.browse{
+    text-align: center;
+}
+
+#compareDialog{
+    width: 210px !important;
+    z-index: 15 !important;
+    font-size: 12px;
+}
+
+#compareDialog .ui-datalist-header #title{
+    font-size: 18px;
+}
+
+#compareDialog .ui-dataList-content{
+    vertical-align: middle;
+}
+
+#compareDialog .ui-button{
+    display: inline !important;
+    font-size:10px;
+    width:80px;
+}
+
+form#siteModerator{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#siteModFormFooter {
+    display:inline;
+}
+
+.minuteSpinner input{
+    width: 100px;
+}
+
+#modList #siteModFormFooter #userInputLabel {
+    display:inline;
+}
+
+form#siteModerator .ui-button{
+    font-size: 14px;
+}
+
+.modList{
+    
+}
+
+#smallProfilePic{
+    max-height: 25px;
+    max-width: 25px;
+    vertical-align: top;
+    margin-left: 5px;
+}
+
+ the wrapper 
+.ellipsify {
+    font-size:12px;
+    line-height:18px;
+    height: 54px;        3x line height 
+    width: 150px;
+    overflow: hidden;
+    position: relative;  so we're a positioning parent for the dot hiders 
+    background: white;
+}
+
+ Used to push down .dots. Can't use absolute positioning, since that
+   would stop the floating. Can't use relative positioning, since that
+   would cause floating in the wrong (namely: original) place. Can't 
+   change height of #dots, since it would have the full width, and
+   thus cause early wrapping on all lines. 
+
+   http://stackoverflow.com/questions/6222616/with-css-use-for-overflowed-block-of-multi-lines
+
+
+.pre-dots {
+    float: right;
+    height: 36px;   2x line height (one less than visible lines) 
+}
+
+.dots {
+    float: right;  to make the text wrap around the dots 
+    clear: right;  to push us below (not next to) .pre-dots 
+}
+
+ hides the dots if the text has *exactly* 3 lines 
+.hidedots1 {
+    background: white;
+    width: 150px;
+    height: 18px;        line height 
+    position: absolute;  otherwise, because of the width, it'll be wrapped 
+}
+
+.ellipsify .recipeSmallName{
+    font-weight: bold;
+    font-size: 16px;
+}
+
+#profileAbout{
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+}
+*/

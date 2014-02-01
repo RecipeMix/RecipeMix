@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (C) 2013 Steven Paz <steve.a.paz@gmail.com>
+ California State University Long Beach (CSULB) ALL RIGHTS RESERVED
+
+ Use of this software is authorized for CSULB students in Dr. Monge's classes, so long
+ as this copyright notice remains intact. Students must request permission from Dr. Monge
+ if the code is to be used in other venues outside of Dr. Monge's classes.
+
+ This program is distributed to CSULB students in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+-->
+<!-- @author: Steven Paz <steve.a.paz@gmail.com>-->
+<!-- @author: Jairo Lopez <jairo.lopez00@gmail.com> -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:body>
+        <ui:composition template="/resources/templates/commonLayout.xhtml">
+            <ui:define name="header">
+                <ui:include src="/resources/templates/commonHeader.xhtml" />
+                <h:outputStylesheet library="css" name="jquery.tagsinput.css" />
+                <h:outputScript library="primefaces" name="jquery/jquery.js" target="head"/>
+                <h:outputScript library="js" name="jquery.tagsinput.min.js" target="head"/>
+            </ui:define>
+            <ui:define name="title">Group Wizard</ui:define>
+            <ui:define name ="content">
+                <h:form prependId="false">
+                    <c:choose>
+                        <c:when test="#{groupsController.editMode}">
+                            <h1><h:outputText value="Edit Group"/></h1>
+                        </c:when>
+                        <c:otherwise>
+                            <h1><h:outputText value="Create Group"/></h1>
+                        </c:otherwise>
+                    </c:choose>
+                    <ul class="formFields">
+                        <li>
+                            <p:outputLabel value="Name:" for="groupName"/>
+                            <p:inputText id="groupName" value="#{groupsController.group.groupName}" title="GroupName" 
+                                         required="true" requiredMessage="The Name field is required."/>
+                        </li>
+                        <li>
+                            <p:outputLabel value="Description:" for="description" />
+                            <p:inputTextarea id="description" cols="60" autoResize="TRUE" maxlength="2500"
+                                             value="#{groupsController.group.groupDescription}" title="Description" 
+                                             required="true" requiredMessage="The Description field is required."
+                                             />
+                        </li>
+                        <li>
+                            <h:outputText value="Make this group..." />
+                            <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+                                <p:outputLabel value="Private (Invisible to all other users)" />
+                                <p:selectBooleanCheckbox value="#{groupsController.group.privacy}" />
+                                <h:outputText value="Restricted (users must ask permission to join)" />
+                                <p:selectBooleanCheckbox value="#{groupsController.group.restricted}" />
+                            </h:panelGrid>
+
+                        </li>
+                        <li>
+                            <p:outputLabel value="Tags (Click or hit Enter to add another tag):" for="tags" />
+                            <p:watermark for="tags" value="examples: vegan, chicken, italian, gordonramsay"/>
+                            <p:inputText id="tags" size="50" value="#{groupsController.inputTags}" title="Tags" />
+                        </li>
+                    </ul>
+
+                    <p:commandButton value="Create Group" action="#{groupsController.doCreateGroups}"
+                                     rendered="#{!groupsController.editMode}"/>
+
+                    <p:commandButton value="Edit Group" action="#{groupsController.doEditGroup}"
+                                     rendered="#{groupsController.editMode}">
+                        <f:param name="groupID" value="#{groupsController.id}" />
+                    </p:commandButton>
+                </h:form>
+                
+                <script type="text/javascript">
+                    $ = jQuery;
+                    $(function() {
+                        $('#tags').tagsInput();
+                    });
+                </script>
+                
+            </ui:define>
+        </ui:composition>
+
+    </h:body>
+
+</html>
